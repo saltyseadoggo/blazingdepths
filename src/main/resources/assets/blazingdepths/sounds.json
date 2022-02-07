@@ -1,0 +1,12 @@
+
+{
+	"ambient.seared_dunes.loop": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "blazingdepths:music/seared_dunes",
+				"stream": true
+			}
+		]
+	}
+}
