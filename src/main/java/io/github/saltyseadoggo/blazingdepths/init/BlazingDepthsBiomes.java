@@ -12,7 +12,7 @@ import net.minecraft.world.biome.Biome;
 
 public class BlazingDepthsBiomes {
         //init variable for seared dunes biome's registry key
-    public static RegistryKey<Biome> SEARED_DUNES = add("seared_dunes", SearedDunesBiome.create());
+    public static RegistryKey<Biome> SEARED_DUNES_KEY = add("seared_dunes", SearedDunesBiome.SEARED_DUNES);
 
 	//copied from a vanilla class, both terrestria and promenade have this, it gets biome sky colour based on temperature
 	public static int getSkyColor(float temperature) {
@@ -22,7 +22,7 @@ public class BlazingDepthsBiomes {
 	}
 
     public static void init() {
-        NetherBiomes.addNetherBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier(BlazingDepths.MOD_ID, "seared_dunes")), SearedDunesBiome.NOISE_POINT);
+        NetherBiomes.addNetherBiome(SEARED_DUNES_KEY, SearedDunesBiome.NOISE_POINT);
     }
 
 	private static RegistryKey<Biome> add(String s, Biome b) {

@@ -23,6 +23,7 @@ import net.minecraft.world.gen.feature.NetherPlacedFeatures;
 import net.minecraft.world.gen.feature.OrePlacedFeatures;
 
 public class SearedDunesBiome {
+    public static Biome SEARED_DUNES = create();
 
         //These values relate to the new 1.18 overworld generation, and how it places biomes and creates mountains and such.
         //I have no clue why I need this for a Nether biome, but I can't register it without it.
@@ -42,16 +43,14 @@ public class SearedDunesBiome {
     }
 
     public static BiomeEffects createBiomeEffects() {
-        BiomeEffects.Builder builder = new BiomeEffects.Builder();
-
-        builder
+        BiomeEffects.Builder builder = new BiomeEffects.Builder()
                 //Brightest shade from the seared sandstone top texture converted from hexadecimal to decimal with an online converter
             .fogColor(13784875)
                 //The water & sky colours zone
             .waterColor(4159204)
 			.waterFogColor(329011)
             .skyColor(BlazingDepthsBiomes.getSkyColor(2.0F))
-                //TODO: replace temporary crimson forest particles with cool unique particles
+                //TODO: replace temporary crimson forest particles with abundant, sight obstructing sand particles
             .particleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.025F))
                 //The music & sounds zone
             .loopSound(BlazingDepthsSoundEvents.AMBIENT_SEARED_DUNES_LOOP)
@@ -63,16 +62,9 @@ public class SearedDunesBiome {
     }
 
     public static GenerationSettings createGenerationSettings() {
-        GenerationSettings.Builder builder = new GenerationSettings.Builder();
-
-            //Mojank made these private, so I guess no structures in the dunes for now...
-        //builder.structureFeature(ConfiguredStructureFeatures.FORTRESS);
-        //builder.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
-        //builder.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
-
-        builder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
-
-        builder
+        GenerationSettings.Builder builder = new GenerationSettings.Builder()
+                //Nether cave carver
+            .carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.PATCH_FIRE)
                 //GLOWSTONE_EXTRA absolutely must come before GLOWSTONE, or the game crashes on the Create New World screen
@@ -81,23 +73,25 @@ public class SearedDunesBiome {
                 //TODO: replace with one with shorter, age 15 vines
             .feature(GenerationStep.Feature.VEGETAL_DECORATION, NetherPlacedFeatures.WEEPING_VINES)
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, OrePlacedFeatures.ORE_MAGMA);
-            //TODO: basalt collumn reskin
-            //TODO: crimson roots
-            //TODO: rare warped roots
-            //TODO: big crimson roots
-            //TODO: rare big warped roots
+                //TODO: basalt collumn reskin
+                //TODO: crimson roots
+                //TODO: rare warped roots
+                //TODO: big crimson roots
+                //TODO: rare big warped roots
+                //Mojank made these private, so I guess no structures in the dunes for now...
+            //.structureFeature(ConfiguredStructureFeatures.FORTRESS)
+            //.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER)
+            //.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT)
 
         DefaultBiomeFeatures.addNetherMineables(builder);
-
         return builder.build();
     }
 
     public static SpawnSettings createSpawnSettings() {
-        SpawnSettings.Builder builder = new SpawnSettings.Builder();
-
-        builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 40, 1, 1));
-        builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 100, 2, 5));
-        builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+        SpawnSettings.Builder builder = new SpawnSettings.Builder()
+            .spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 40, 1, 1))
+            .spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 100, 2, 5))
+            .spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
 
         return builder.build();
     }

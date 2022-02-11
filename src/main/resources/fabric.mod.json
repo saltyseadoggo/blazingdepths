@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "io.github.saltyseadoggo.blazingdepths.BlazingDepths"
+    ],
+    "terrablender": [
+      "io.github.saltyseadoggo.blazingdepths.terrablender.BlazingDepthsTerraBlenderImpl"
     ]
   },
   "mixins": [
