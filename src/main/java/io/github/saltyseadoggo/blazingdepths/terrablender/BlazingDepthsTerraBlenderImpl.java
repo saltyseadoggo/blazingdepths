@@ -54,7 +54,7 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi
         }
 
         @Override
-        public Optional<MaterialRules.MaterialRule> getOverworldSurfaceRules()
+        public Optional<MaterialRules.MaterialRule> getNetherSurfaceRules()
         {
             return Optional.of(BlazingDepthsSurfaceRules.makeRules());
         }
