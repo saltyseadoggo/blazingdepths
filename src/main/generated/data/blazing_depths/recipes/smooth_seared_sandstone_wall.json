@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "blazing_depths:smooth_seared_sandstone"
+    }
+  },
+  "result": {
+    "item": "blazing_depths:smooth_seared_sandstone_wall",
+    "count": 6
+  }
+}

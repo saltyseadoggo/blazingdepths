@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "blazing_depths:block/seared_sandstone_top"
+  }
+}

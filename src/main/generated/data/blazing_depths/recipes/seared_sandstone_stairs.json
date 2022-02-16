@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "blazing_depths:seared_sandstone"
+    }
+  },
+  "result": {
+    "item": "blazing_depths:seared_sandstone_stairs",
+    "count": 4
+  }
+}

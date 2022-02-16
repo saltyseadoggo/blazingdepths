@@ -4,7 +4,7 @@
       "model": "blazing_depths:block/seared_sandstone_slab"
     },
     "type=double": {
-      "model": "blazing_depths:block/seared_sandstone"
+      "model": "blazing_depths:block/smooth_seared_sandstone"
     },
     "type=top": {
       "model": "blazing_depths:block/seared_sandstone_slab_top"
