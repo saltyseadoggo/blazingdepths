@@ -20,6 +20,9 @@
     "main": [
       "io.github.saltyseadoggo.blazingdepths.BlazingDepths"
     ],
+    "terrablender": [
+      "io.github.saltyseadoggo.blazingdepths.terrablender.BlazingDepthsTerraBlenderImpl"
+    ],
     "fabric-datagen": [
       "io.github.saltyseadoggo.blazingdepths.datagen.BlazingDepthsDataGen"
     ]

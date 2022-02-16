@@ -224,11 +224,17 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			createSlabRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE)).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			createStairsRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE)).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			offerWallRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SEARED_SANDSTONE);
+			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, BlazingDepthsBlocks.SEARED_SANDSTONE, 2);
+			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, BlazingDepthsBlocks.SEARED_SANDSTONE);
+			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SEARED_SANDSTONE);
 
 			CookingRecipeJsonFactory.createSmelting(Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE), BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE.asItem(), 0.1F, 200).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			createSlabRecipe(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).criterion("has_smooth_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).offerTo(exporter);
 			createStairsRecipe(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).criterion("has_smooth_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).offerTo(exporter);
 			offerWallRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE);
+			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE, 2);
+			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE);
+			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE);
 		}
 
 	}

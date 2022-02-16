@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blazing_depths:smooth_seared_sandstone"
+  },
+  "result": "blazing_depths:smooth_seared_sandstone_wall",
+  "count": 1
+}

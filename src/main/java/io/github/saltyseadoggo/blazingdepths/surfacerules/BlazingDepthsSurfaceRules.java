@@ -13,7 +13,7 @@ public class BlazingDepthsSurfaceRules {
 			MaterialRules.sequence(
                 //Place seared sand on the surface.
                 //STONE_DEPTH_FLOOR is the Yarn version of ON_FLOOR in Mojang mappings.
-                MaterialRules.condition(MaterialRules.STONE_DEPTH_FLOOR, MaterialRules.block(Blocks.RED_SAND.getDefaultState())),
+                MaterialRules.condition(MaterialRules.STONE_DEPTH_FLOOR, MaterialRules.block(BlazingDepthsBlocks.SEARED_SAND.getDefaultState())),
                 //Place seared sandstone underneath.
                 MaterialRules.condition(MaterialRules.STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH, MaterialRules.block(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState()))
             )
