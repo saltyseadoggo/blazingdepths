@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "blazing_depths:block/seared_sandstone_top"
+  }
+}

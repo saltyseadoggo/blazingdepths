@@ -23,13 +23,6 @@ import net.minecraft.world.gen.feature.NetherPlacedFeatures;
 import net.minecraft.world.gen.feature.OrePlacedFeatures;
 
 public class SearedDunesBiome {
-    public static Biome SEARED_DUNES = create();
-
-        //These values relate to the new 1.18 overworld generation, and how it places biomes and creates mountains and such.
-        //I have no clue why I need this for a Nether biome, but I can't register it without it.
-        //Values used by the vanilla Nether biomes can be referenced in MultiNoiseBiomeSource$Preset.
-    public static final NoiseHypercube NOISE_POINT = MultiNoiseUtil.createNoiseHypercube(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-
     public static Biome create() {
 		return (new Biome.Builder())
             .precipitation(Biome.Precipitation.NONE)
@@ -44,15 +37,15 @@ public class SearedDunesBiome {
 
     public static BiomeEffects createBiomeEffects() {
         BiomeEffects.Builder builder = new BiomeEffects.Builder()
-                //Brightest shade from the seared sandstone top texture converted from hexadecimal to decimal with an online converter
+			//Brightest shade from the seared sandstone top texture converted from hexadecimal to decimal with an online converter
             .fogColor(13784875)
-                //The water & sky colours zone
+			//The water & sky colours zone
             .waterColor(4159204)
 			.waterFogColor(329011)
             .skyColor(BlazingDepthsBiomes.getSkyColor(2.0F))
-                //TODO: replace temporary crimson forest particles with abundant, sight obstructing sand particles
+			//TODO: replace temporary crimson forest particles with abundant, sight obstructing sand particles
             .particleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.025F))
-                //The music & sounds zone
+			//The music & sounds zone
             .loopSound(BlazingDepthsSoundEvents.AMBIENT_SEARED_DUNES_LOOP)
             .moodSound(new BiomeMoodSound(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
 			.additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D))

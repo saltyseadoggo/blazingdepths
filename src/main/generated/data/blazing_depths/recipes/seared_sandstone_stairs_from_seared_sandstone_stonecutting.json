@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blazing_depths:seared_sandstone"
+  },
+  "result": "blazing_depths:seared_sandstone_stairs",
+  "count": 1
+}

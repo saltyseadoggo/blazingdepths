@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "blazing_depths:seared_sandstone_slab"
+    ]
+  },
+  "criteria": {
+    "has_seared_sandstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazing_depths:seared_sandstone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "blazing_depths:seared_sandstone_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_seared_sandstone",
+      "has_the_recipe"
+    ]
+  ]
+}

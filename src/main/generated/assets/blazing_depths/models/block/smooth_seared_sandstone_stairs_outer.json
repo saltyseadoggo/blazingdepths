@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "blazing_depths:block/seared_sandstone_top",
+    "top": "blazing_depths:block/seared_sandstone_top",
+    "side": "blazing_depths:block/seared_sandstone_top"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "blazing_depths:block/seared_sandstone_top",
+    "side": "blazing_depths:block/seared_sandstone"
+  }
+}
