@@ -5,14 +5,11 @@ import io.github.saltyseadoggo.blazingdepths.blocks.NonProtectedStairsBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
 import net.minecraft.block.SandBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -25,9 +22,7 @@ public class BlazingDepthsBlocks {
     //Here, we're defining what class each of our blocks is an instance of, and configuring them with the .options() you see.
 
     //Seared Sand
-    //(Values are the same as those of red sand, found in Blocks.class)
-    //(Using AbstractBlock.settings.copy(Blocks.RED_SAND) crashes the game during initialization)
-    public static final Block SEARED_SAND = new SandBlock(SearedSandDustColor, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.ORANGE).strength(0.5f).sounds(BlockSoundGroup.SAND));
+    public static final Block SEARED_SAND = new SandBlock(SearedSandDustColor, AbstractBlock.Settings.copy(Blocks.RED_SAND));
 
     //Seared Sandstone
     public static final Block SEARED_SANDSTONE = new Block(AbstractBlock.Settings.copy(Blocks.RED_SANDSTONE));

@@ -19,9 +19,11 @@ public class BlazingDepths implements ModInitializer {
   	@Override
  	public void onInitialize() {
 		//Run separate init classes found in the init folder
+		//BlazingDepthsBlocks *must* be initialized before BlazingDepthsBiomes, or the game crashes during initialization.
+		//This is because BlazingDepthsBlocks sets the variable containing the fog color for the Seared Dunes biome.
 		BlazingDepthsSoundEvents.init();
-		BlazingDepthsBiomes.init();
 		BlazingDepthsBlocks.init();
+		BlazingDepthsBiomes.init();
 	}
 
 	public static Identifier makeIdentifier(String path) {

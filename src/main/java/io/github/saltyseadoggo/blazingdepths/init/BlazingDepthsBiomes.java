@@ -19,6 +19,7 @@ public class BlazingDepthsBiomes {
 		return MathHelper.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
 	}
 
+	//Olivia made the init method do nothing, yet the biome still gets registered. I guess calling an empty init method still runs the whole class?
     public static void init() {}
 
 	public static RegistryKey<Biome> register(String name, Biome biome) {
