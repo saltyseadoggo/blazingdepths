@@ -10,14 +10,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockStateDefinitionPro
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.model.*;
 import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.data.server.recipe.CookingRecipeJsonFactory;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonFactory;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
@@ -63,7 +61,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 					.put(TextureKey.END, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone_top")));
 			blockStateModelGenerator.registerSingleton(BlazingDepthsBlocks.SEARED_SANDSTONE, searedSandstoneFactory);
 			blockStateModelGenerator.registerParentedItemModel(BlazingDepthsBlocks.SEARED_SANDSTONE,
-					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SAND));
+					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SANDSTONE));
 
 			wall(BlazingDepthsBlocks.SEARED_SANDSTONE_WALL, searedSandstoneTexture, blockStateModelGenerator);
 			stairs(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, searedSandstoneTexture, blockStateModelGenerator);

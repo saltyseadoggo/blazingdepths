@@ -2,7 +2,6 @@ package io.github.saltyseadoggo.blazingdepths.init;
 
 import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.biomes.SearedDunesBiome;
-import net.fabricmc.fabric.api.biome.v1.NetherBiomes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;

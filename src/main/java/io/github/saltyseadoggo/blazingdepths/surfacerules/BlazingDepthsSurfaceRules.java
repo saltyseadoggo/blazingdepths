@@ -2,7 +2,6 @@ package io.github.saltyseadoggo.blazingdepths.surfacerules;
 
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 
 public class BlazingDepthsSurfaceRules {

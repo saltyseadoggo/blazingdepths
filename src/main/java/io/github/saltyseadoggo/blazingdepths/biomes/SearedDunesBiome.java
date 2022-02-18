@@ -1,6 +1,7 @@
 package io.github.saltyseadoggo.blazingdepths.biomes;
 
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
+import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsSoundEvents;
 import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
@@ -14,8 +15,6 @@ import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.biome.source.util.MultiNoiseUtil;
-import net.minecraft.world.biome.source.util.MultiNoiseUtil.NoiseHypercube;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.carver.ConfiguredCarvers;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
@@ -37,8 +36,8 @@ public class SearedDunesBiome {
 
     public static BiomeEffects createBiomeEffects() {
         BiomeEffects.Builder builder = new BiomeEffects.Builder()
-			//Brightest shade from the seared sandstone top texture converted from hexadecimal to decimal with an online converter
-            .fogColor(13784875)
+			//Use seared sand's dust particle color as the fog color
+            .fogColor(BlazingDepthsBlocks.SearedSandDustColor)
 			//The water & sky colours zone
             .waterColor(4159204)
 			.waterFogColor(329011)
