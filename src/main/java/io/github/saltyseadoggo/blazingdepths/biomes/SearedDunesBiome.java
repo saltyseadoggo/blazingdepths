@@ -1,5 +1,6 @@
 package io.github.saltyseadoggo.blazingdepths.biomes;
 
+import io.github.saltyseadoggo.blazingdepths.features.BlazingDepthsFeatures;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsSoundEvents;
@@ -55,6 +56,7 @@ public class SearedDunesBiome {
 
     public static GenerationSettings createGenerationSettings() {
         GenerationSettings.Builder builder = new GenerationSettings.Builder()
+            //.feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_FEATURE)
                 //Nether cave carver
             .carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.
