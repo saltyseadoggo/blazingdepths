@@ -31,7 +31,7 @@ public class BlazingDepthsFeatures {
     //placed feature
     public static final PlacedFeature SEARED_DUNE_PLACED_FEATURE = SEARED_DUNE_FEATURE.withPlacement();
 
-    public void init() {
+    public static void init() {
         //feature
         Registry.register(Registry.FEATURE, BlazingDepths.makeIdentifier("dune_feature"), DUNE_FEATURE);
         //configured feature
