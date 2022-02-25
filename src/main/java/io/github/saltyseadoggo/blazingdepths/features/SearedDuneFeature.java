@@ -22,6 +22,7 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 	int duneMaxHeight = 10;
 	//Set the x and z scale applied to the noise map, which affects the horizontal size of the dunes.
 	//1.16 Terrestria dunes biome's values are 0.01 and 0.015, respectively
+
 	double noiseMapXScale = 0.1;
 	double noiseMapZScale = 0.15;
 	//Set the y value below which dunes are not formed. Currently set to one less than the Nether's sea level of 31
@@ -70,4 +71,5 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 		//Some BYG features had this set to true, but their dune feature had it set to false. I need to figure out what it means.
 		return false;
 	}
+
 }
