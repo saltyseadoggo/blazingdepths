@@ -1,12 +1,9 @@
 package io.github.saltyseadoggo.blazingdepths.features;
 
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import io.github.saltyseadoggo.blazingdepths.noise.OpenSimplexNoise;
-import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
@@ -35,6 +32,8 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 	@Override
 	public boolean generate(FeatureContext<DuneFeatureConfig> featureContext) {
 
+		DuneFeatureConfig config = featureContext.getConfig();
+		StructureWorldAccess world = featureContext.getWorld();
 		BlockPos.Mutable checkingPos = new BlockPos.Mutable();
 		BlockPos.Mutable duneBuilderPos;
 
@@ -42,15 +41,14 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 			for (int zMove = 0; zMove < 16; zMove++) {
 				//Loop through all y coordinates and build dune columns on top of each seared sand placed by the surface rule
 				for(int y = 120; y > noDunesBelowY; --y) {
-					checkingPos.set(featureContext.getOrigin()).move(xMove, 0, zMove);
-					StructureWorldAccess world = featureContext.getWorld();
-					Chunk chunk = world.getChunk(checkingPos);
-					BlockState stateAtCheckingPos = chunk.getBlockState(checkingPos);
+					checkingPos.set(featureContext.getOrigin()).move(xMove, y, zMove);
 					//If it detects seared sand placed by surface rule at checkingPos, we build a dune column on top
-					if (stateAtCheckingPos == BlazingDepthsBlocks.SEARED_SAND.getDefaultState()) {
+					if (world.getBlockState(checkingPos) == config.underBlock().getBlockState(featureContext.getRandom(), checkingPos)) {
 						//If there's air under the current sand block, replace the current sand block with sandstone to prevent floating sand
-						if (chunk.getBlockState(new BlockPos(xMove, y-1, zMove)).isAir()) {
-							chunk.setBlockState(checkingPos, BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState(), false);
+						if (world.getBlockState(new BlockPos(xMove, y-1, zMove)).isAir()) {
+							//This block placing line is from the Fabric feature tutorial, and it is extremely stupid.
+							//I don't understand why I need a fucking random to place a block, or what 'flags' means.
+							world.setBlockState(checkingPos, config.underBlock().getBlockState(featureContext.getRandom(), checkingPos), 3);
 						}
 
 						duneBuilderPos = checkingPos;
@@ -62,7 +60,9 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 						//The height loop forms the dunes.
 						for (int h = 0; h < height; h++) {
 							duneBuilderPos.move(Direction.UP);
-							chunk.setBlockState(duneBuilderPos, BlazingDepthsBlocks.SEARED_SAND.getDefaultState(), false);
+							//This block placing line is from the Fabric feature tutorial, and it is extremely stupid.
+							//I don't understand why I need a fucking random to place a block, or what 'flags' means.
+							world.setBlockState(duneBuilderPos, config.surfaceBlock().getBlockState(featureContext.getRandom(), duneBuilderPos), 3);
 						}
 					}
 				}
