@@ -14,27 +14,27 @@ import com.mojang.serialization.Codec;
 
 public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 
-		//Fetch a noise map from TerraformAPI
+	//Fetch a noise map from TerraformAPI
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(3445);
-		//Set the approximate maximum height above y=70 of the dunes, to be used for setting `height` when building collumns based on the noise
-		//Terrestria dunes biome's value is 30
+	//Set the approximate maximum height above y=70 of the dunes, to be used for setting `height` when building collumns based on the noise
+	//Terrestria dunes biome's value is 30
 	int duneMaxHeight = 10;
-		//Set the x and z scale applied to the noise map, which affects the horizontal size of the dunes.
-		//Terrestria dunes biome's values are 0.01 and 0.015, respectively
+	//Set the x and z scale applied to the noise map, which affects the horizontal size of the dunes.
+	//Terrestria dunes biome's values are 0.01 and 0.015, respectively
 	double noiseMapXScale = 0.1;
 	double noiseMapZScale = 0.15;
-		//Set the y value below which dunes are not formed. Currently set to one less than the Nether's sea level of 31
+	//Set the y value below which dunes are not formed. Currently set to one less than the Nether's sea level of 31
 	int noDunesBelowY = 30;
 
 	public SearedDuneFeature(Codec<DuneFeatureConfig> configCodec) {
         super(configCodec);
-    };
+    }
 
 	@Override
 	public boolean generate(FeatureContext<DuneFeatureConfig> featureContext) {
 
 		BlockPos.Mutable checkingPos = new BlockPos.Mutable();
-		BlockPos.Mutable duneBuilderPos = new BlockPos.Mutable();
+		BlockPos.Mutable duneBuilderPos;
 
 		for (int xMove = 0; xMove < 16; xMove++) {
 			for (int zMove = 0; zMove < 16; zMove++) {
@@ -69,4 +69,5 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 		}
 		return false;
 	}
+
 }
