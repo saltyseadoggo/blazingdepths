@@ -10,7 +10,7 @@ public class NonProtectedSimpleBlockStateProvider extends SimpleBlockStateProvid
     //However, Mojank decided to make SimpleBlockStateProvider protected.
     //This class extends it, and is public, so we can use SimpleBlockStateProvider 'through' this class.
 
-    protected NonProtectedSimpleBlockStateProvider(BlockState state) {
+    public NonProtectedSimpleBlockStateProvider(BlockState state) {
         super(state);
     }
 }

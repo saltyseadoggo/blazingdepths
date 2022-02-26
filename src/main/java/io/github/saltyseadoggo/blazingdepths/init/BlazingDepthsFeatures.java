@@ -1,6 +1,9 @@
-package io.github.saltyseadoggo.blazingdepths.features;
+package io.github.saltyseadoggo.blazingdepths.init;
 
 import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
+import io.github.saltyseadoggo.blazingdepths.features.DuneFeatureConfig;
+import io.github.saltyseadoggo.blazingdepths.features.NonProtectedSimpleBlockStateProvider;
+import io.github.saltyseadoggo.blazingdepths.features.SearedDuneFeature;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;

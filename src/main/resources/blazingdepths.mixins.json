@@ -4,6 +4,7 @@
   "package": "io.github.saltyseadoggo.blazingdepths.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CarverMixin"
   ],
   "client": [],
   "injectors": {
