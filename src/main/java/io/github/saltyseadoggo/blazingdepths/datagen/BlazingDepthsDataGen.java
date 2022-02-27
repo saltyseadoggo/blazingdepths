@@ -5,10 +5,7 @@ import io.github.saltyseadoggo.blazingdepths.datagen.api.LanguageDataProvider;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTablesProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockStateDefinitionProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
@@ -17,7 +14,6 @@ import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.client.TextureMap;
 import net.minecraft.data.client.TexturedModel;
-import net.minecraft.data.client.model.*;
 import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
@@ -42,7 +38,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 		fabricDataGenerator.addProvider(new BlazingItemTagsDataProvider(fabricDataGenerator, blockTagsProvider));
 	}
 
-	private static class BlockStateDefinitionProvider extends FabricBlockStateDefinitionProvider {
+	private static class BlockStateDefinitionProvider extends FabricModelProvider {
 
 		public BlockStateDefinitionProvider(FabricDataGenerator dataGenerator) {
 			super(dataGenerator);
@@ -153,7 +149,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 		}
 	}
 
-	private static class BlazingLootTableDataProvider extends FabricBlockLootTablesProvider {
+	private static class BlazingLootTableDataProvider extends FabricBlockLootTableProvider {
 
 		protected BlazingLootTableDataProvider(FabricDataGenerator dataGenerator) {
 			super(dataGenerator);
@@ -215,7 +211,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 
 	}
 
-	private static class BlazingRecipesDataProvider extends FabricRecipesProvider {
+	private static class BlazingRecipesDataProvider extends FabricRecipeProvider {
 
 		protected BlazingRecipesDataProvider(FabricDataGenerator dataGenerator) {
 			super(dataGenerator);
