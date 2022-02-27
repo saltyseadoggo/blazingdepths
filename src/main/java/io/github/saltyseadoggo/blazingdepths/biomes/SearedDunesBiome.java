@@ -62,7 +62,7 @@ public class SearedDunesBiome {
     public static GenerationSettings createGenerationSettings() {
         GenerationSettings.Builder builder = new GenerationSettings.Builder()
                 //Our own dune feature
-            .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED_FEATURE)
+            .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED)
                 //Nether cave carver
             .carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.

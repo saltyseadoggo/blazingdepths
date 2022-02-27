@@ -1,16 +1,15 @@
 package io.github.saltyseadoggo.blazingdepths.init;
 
-import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.features.DuneFeatureConfig;
 import io.github.saltyseadoggo.blazingdepths.features.NonProtectedSimpleBlockStateProvider;
 import io.github.saltyseadoggo.blazingdepths.features.SearedDuneFeature;
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+
+import java.util.List;
 
 public class BlazingDepthsFeatures {
 
@@ -24,25 +23,43 @@ public class BlazingDepthsFeatures {
     //Another word for a 'placed feature' could be 'generated feature' because it's what actually gets generated in the world.
     //Every 'placement modifier' has different options, and it's some few of them which is necessary for them to spawn correctly and nice looking
 
-    //feature
-    public static final Feature<DuneFeatureConfig> DUNE_FEATURE =  new SearedDuneFeature(DuneFeatureConfig.CODEC.stable());
-    //configured feature
-    public static final ConfiguredFeature<?, ?> SEARED_DUNE_FEATURE = DUNE_FEATURE.configure(new DuneFeatureConfig(
-        new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
-        new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())
-    ));
-    //placed feature
-    public static final PlacedFeature SEARED_DUNE_PLACED_FEATURE = SEARED_DUNE_FEATURE.withPlacement();
+    //Features
+    //Feature formatting can be referenced from Feature.class
+    public static final Feature<DuneFeatureConfig> DUNE_FEATURE =
+            registerFeature("nether_dune_feature", new SearedDuneFeature(DuneFeatureConfig.CODEC.stable()));
 
-    public static void init() {
-        //feature
-        Registry.register(Registry.FEATURE, BlazingDepths.makeIdentifier("dune_feature"), DUNE_FEATURE);
-        //configured feature
-        RegistryKey<ConfiguredFeature<?, ?>> SEARED_DUNE_FEATURE_KEY = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, BlazingDepths.makeIdentifier("seared_dune_feature"));
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, SEARED_DUNE_FEATURE_KEY.getValue(), SEARED_DUNE_FEATURE);
-        //placed feature
-        RegistryKey<PlacedFeature> SEARED_DUNE_PLACED_FEATURE_KEY = RegistryKey.of(Registry.PLACED_FEATURE_KEY, BlazingDepths.makeIdentifier("seared_dune_feature"));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, SEARED_DUNE_PLACED_FEATURE_KEY.getValue(), SEARED_DUNE_PLACED_FEATURE);
+    //Configured Features
+    //Configured feature formatting can be referenced from NetherConfiguredFeatures.class, or any other ___ConfiguredFeatures.class
+    public static final RegistryEntry<ConfiguredFeature<DuneFeatureConfig, ?>> SEARED_DUNE =
+            registerCFeature("seared_dune", DUNE_FEATURE, new DuneFeatureConfig(
+                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
+                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())));
+
+    //Placed Features
+    //Placed feature formatting, as well as different PlacementModifiers, can be referenced from NetherPlacedFeatures.class, or any other ___PlacedFeatures.class
+    //If we actually use PlacementModifiers, reference the above class(es) on how to employ them. Intellij said I didn't need to initialize an empty array :p
+    public static final RegistryEntry<PlacedFeature> SEARED_DUNE_PLACED =
+            registerPFeature("seared_dune", SEARED_DUNE);
+
+    //The registry zone
+    //Contains multipurpose registration methods that can register any feature we feed them
+    //registerFeature for features, registerCFeature for configured features, registerPFeature for placed features
+
+    //Feature registering method adapted from Feature.class
+    public static <C extends FeatureConfig, F extends Feature<C>> F registerFeature(String name, F feature) {
+        return Registry.register(Registry.FEATURE, name, feature);
     }
-    
+    //Configured feature registering method adapted from ConfiguredFeatures.class
+    public static <FC extends FeatureConfig, F extends Feature<FC>> RegistryEntry<ConfiguredFeature<FC, ?>> registerCFeature(String id, F feature, FC config) {
+        return BuiltinRegistries.method_40360(BuiltinRegistries.CONFIGURED_FEATURE, id, new ConfiguredFeature(feature, config));
+    }
+    //Placed feature registering methods adapted from PlacedFeatures.class
+    public static RegistryEntry<PlacedFeature> registerPFeature(String id, RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry, List<PlacementModifier> modifiers) {
+        return BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, id, new PlacedFeature(RegistryEntry.upcast(registryEntry), List.copyOf(modifiers)));
+    }
+    public static RegistryEntry<PlacedFeature> registerPFeature(String id, RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry, PlacementModifier... modifiers) {
+        return registerPFeature(id, registryEntry, List.of(modifiers));
+    }
+
+    public static void init() {}
 }
