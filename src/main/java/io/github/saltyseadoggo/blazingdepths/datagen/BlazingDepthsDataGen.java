@@ -10,12 +10,18 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockStateDefinitionPro
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.ModelIds;
+import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.client.TextureMap;
+import net.minecraft.data.client.TexturedModel;
 import net.minecraft.data.client.model.*;
 import net.minecraft.data.server.BlockLootTableGenerator;
-import net.minecraft.data.server.recipe.CookingRecipeJsonFactory;
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonFactory;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
@@ -52,7 +58,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SAND));
 
 			//Seared Sandstone
-			Texture searedSandstoneTexture = new Texture()
+			TextureMap searedSandstoneTexture = new TextureMap()
 					.put(TextureKey.SIDE, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone"))
 					.put(TextureKey.END, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone_top"))
 					.put(TextureKey.WALL, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone"));
@@ -68,7 +74,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			slab(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, searedSandstoneTexture, blockStateModelGenerator);
 
 			//Smooth Seared Sandstone
-			Texture smoothSearedSandstoneTexture = new Texture()
+			TextureMap smoothSearedSandstoneTexture = new TextureMap()
 					.put(TextureKey.SIDE, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone_top"))
 					.put(TextureKey.END, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone_top"))
 					.put(TextureKey.WALL, new Identifier(BlazingDepths.MOD_ID, "block/seared_sandstone_top"));
@@ -88,7 +94,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 
 		}
 
-		private void stairs(Block block, Texture texture, BlockStateModelGenerator blockStateModelGenerator) {
+		private void stairs(Block block, TextureMap texture, BlockStateModelGenerator blockStateModelGenerator) {
 			Identifier searedSandstoneStairsInner = Models.INNER_STAIRS.upload(block,
 					texture, blockStateModelGenerator.modelCollector);
 			Identifier searedSandstoneStairsStraight = Models.STAIRS.upload(block,
@@ -100,7 +106,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			blockStateModelGenerator.registerParentedItemModel(block, searedSandstoneStairsStraight);
 		}
 
-		private void slab(Block block, Texture texture, BlockStateModelGenerator blockStateModelGenerator) {
+		private void slab(Block block, TextureMap texture, BlockStateModelGenerator blockStateModelGenerator) {
 			Identifier resourceLocation3 = Models.SLAB_TOP.upload(block, texture,
 					blockStateModelGenerator.modelCollector);
 			Identifier resourceLocation4 = Models.SLAB.upload(block, texture,
@@ -110,7 +116,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			blockStateModelGenerator.registerParentedItemModel(block, resourceLocation4);
 		}
 
-		public void wall(Block wallBlock, Texture texture, BlockStateModelGenerator blockStateModelGenerator) {
+		public void wall(Block wallBlock, TextureMap texture, BlockStateModelGenerator blockStateModelGenerator) {
 			Identifier identifier = Models.TEMPLATE_WALL_POST.upload(wallBlock, texture, blockStateModelGenerator.modelCollector);
 			Identifier identifier2 = Models.TEMPLATE_WALL_SIDE.upload(wallBlock, texture, blockStateModelGenerator.modelCollector);
 			Identifier identifier3 = Models.TEMPLATE_WALL_SIDE_TALL.upload(wallBlock, texture, blockStateModelGenerator.modelCollector);
@@ -217,7 +223,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 
 		@Override
 		protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
-			ShapedRecipeJsonFactory.create(BlazingDepthsBlocks.SEARED_SANDSTONE).input('#', BlazingDepthsBlocks.SEARED_SAND).pattern("##").pattern("##")
+			ShapedRecipeJsonBuilder.create(BlazingDepthsBlocks.SEARED_SANDSTONE).input('#', BlazingDepthsBlocks.SEARED_SAND).pattern("##").pattern("##")
 					.criterion("has_seared_sand", conditionsFromItem(BlazingDepthsBlocks.SEARED_SAND)).offerTo(exporter);
 			createSlabRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE)).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			createStairsRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE)).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
@@ -226,7 +232,7 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, BlazingDepthsBlocks.SEARED_SANDSTONE);
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SEARED_SANDSTONE);
 
-			CookingRecipeJsonFactory.createSmelting(Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE), BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE.asItem(), 0.1F, 200).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
+			CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE), BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE.asItem(), 0.1F, 200).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			createSlabRecipe(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).criterion("has_smooth_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).offerTo(exporter);
 			createStairsRecipe(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).criterion("has_smooth_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).offerTo(exporter);
 			offerWallRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE);
