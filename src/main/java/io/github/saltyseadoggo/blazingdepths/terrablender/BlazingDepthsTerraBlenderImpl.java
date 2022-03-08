@@ -5,19 +5,14 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 
 import com.mojang.datafixers.util.Pair;
 
 import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
 import io.github.saltyseadoggo.blazingdepths.surfacerules.BlazingDepthsSurfaceRules;
-import terrablender.api.BiomeProvider;
-import terrablender.api.BiomeProviders;
-import terrablender.api.TerraBlenderApi;
-import terrablender.worldgen.TBClimate;
+import terrablender.api.*;
 
-import java.util.Optional;
 import java.util.function.Consumer;
 
 public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
@@ -26,32 +21,27 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
 
     @Override
     public void onTerraBlenderInitialized() {
-        //The former is the overworld provider weight; the latter is the nether provider weight.
-        //Because Blazing Depths doesn't add any overworld biomes, the former value must always be zero, or the game crashes!
-        BiomeProviders.register(new BlazingDepthsBiomeProvider(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), 0, 1));
+        //Register our biome provider containing our biomes
+        Regions.register(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), new BlazingDepthsBiomeProvider());
+        //Add our surface rules
+        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 1, BlazingDepthsSurfaceRules.makeRules());
     }
 
     //Class in a class? I didn't know this was possible but this is how the Terra Blender docs say to do it.
-    public static class BlazingDepthsBiomeProvider extends BiomeProvider {
+    public static class BlazingDepthsBiomeProvider extends Region {
         //The Terra Blender documentation uses the Mojang mappings class name ResourceLocation. With Yarn, it is Identifier.
-        public BlazingDepthsBiomeProvider(Identifier name, int overworldWeight, int netherWeight) {
-            super(name, overworldWeight, netherWeight);
+        public BlazingDepthsBiomeProvider() {
+            super(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), RegionType.NETHER, 1);
         }
 
         //ResourceKey in the Terra Blender docs example is a Mojang mappings name; its Yarn name is RegistryKey.
-        @Override
-        public void addNetherBiomes(Registry<Biome> registry, Consumer<Pair<TBClimate.ParameterPoint, RegistryKey<Biome>>> mapper) {
+        public void addNetherBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
             this.addBiome(mapper,
                     //Temperature, humidity (unused by Nether biomes), continentalness (unused by Nether biomes)
                     MultiNoiseUtil.ParameterRange.of(0.3F), MultiNoiseUtil.ParameterRange.of(0.0F), MultiNoiseUtil.ParameterRange.of(0.0F),
                     //Erosion, weirdness, depth (all unused by Nether biomes)
                     MultiNoiseUtil.ParameterRange.of(0.0F), MultiNoiseUtil.ParameterRange.of(0.0F), MultiNoiseUtil.ParameterRange.of(0.0F),
                     0.0F, BlazingDepthsBiomes.SEARED_DUNES_KEY);
-        }
-
-        @Override
-        public Optional<MaterialRules.MaterialRule> getNetherSurfaceRules() {
-            return Optional.of(BlazingDepthsSurfaceRules.makeRules());
         }
     }
 }

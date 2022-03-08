@@ -51,7 +51,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	//Terra Blender. Needed to register and generate the biomes compatibly, and to apply surface rules.
-	modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.18.1-1.1.0.77'
+	modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.18.2-1.1.0.91'
 }
 
 processResources {
