@@ -18,14 +18,11 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(3445);
 	//Set the approximate maximum height of the dunes, to be used for setting `height` when building collumns based on the noise
 	//1.16 Terrestria had its dunes' height set to 30.
-	int duneMaxHeight = 4;
-	//Set the x and z scale applied to the noise map, which affects the horizontal size of the dunes.
+	int duneMaxHeight = 7;
+	//Set the x and z scale applied to the noise map, which affects the horizontal size of the dunes. Smaller = wider
 	//1.16 Terrestria had these values set to 0.01 and 0.015, respectively.
-	double noiseMapXScale = 0.1;
-	double noiseMapZScale = 0.15;
-	//Set the y value below which dunes are not formed. Currently set to one less than the Nether's sea level of 31.
-	//Because the surface rule doesn't place sand under lava, no dunes would generate there even if we didn't set this. This is just for performance.
-	int noDunesBelowY = 30;
+	double noiseMapXScale = 0.05;
+	double noiseMapZScale = 0.075;
 
 	public SearedDuneFeature(Codec<DuneFeatureConfig> configCodec) {
         super(configCodec);
@@ -34,13 +31,16 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 	@Override
 	public boolean generate(FeatureContext<DuneFeatureConfig> featureContext) {
 
-		//Grab the feature config
+		//Grab the feature config, which we need to get the blocks from
 		DuneFeatureConfig config = featureContext.getConfig();
 		//Get the dimension this feature is generating in (in regular gameplay, this will always be the Nether)
 		StructureWorldAccess world = featureContext.getWorld();
+		//Get the sea level, below which we do not generate dunes.
+		int noDunesBelowY = world.getSeaLevel();
 		//Initialize the two position variables we'll be using to build dunes.
 		BlockPos.Mutable checkingPos = new BlockPos.Mutable();
 		BlockPos.Mutable duneBuilderPos;
+
 
 		//For each of the 16 'rows' in a chunk on the x axis, we check each of the 16 columns along the z axis.
 		for (int loopX = 0; loopX < 16; loopX++) {
@@ -67,21 +67,22 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 						duneBuilderPos = checkingPos;
 						//Sample the noise from the noise map at the x and z coordinates we're in, making the result the height of the column.
 						double height = (NOISE.sample(checkingX * noiseMapXScale , checkingZ * noiseMapZScale) * duneMaxHeight);
-							height = Math.abs(height);
-							height = Math.min(height, (NOISE.sample(checkingX * 0.03 + 5 , checkingZ * 0.05 + 5) * duneMaxHeight + 6));
+						height = Math.abs(height);
 
 						//Yet another loop forms the dunes.
 						for (int h = 0; h < height; h++) {
+							//Skip the first layer deliberately. Otherwise, the sand is two layers deep everywhere unnecessarily.
+							if (h == 0) { continue; }
+							//Move duneBuilderPos up a block
 							duneBuilderPos.move(Direction.UP);
 							//Make sure we aren't replacing other terrain blocks!
 							if (world.getBlockState(duneBuilderPos).isAir()) {
 								//Block placing line using the feature config. From this Fabric tutorial: https://fabricmc.net/wiki/tutorial:features
 								world.setBlockState(duneBuilderPos, config.surfaceBlock().getBlockState(featureContext.getRandom(), duneBuilderPos), 3);
+								continue;
 							}
-							//If we find another terrain block where we're trying to build, stop building the column.
-							else {
-								break;
-							}
+							//If we find another terrain block where we're trying to build, stop building the column
+							break;
 						}
 					}
 				}
