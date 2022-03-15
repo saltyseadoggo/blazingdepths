@@ -110,10 +110,10 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 	//This method is run whenever we find a seared sand block to build a dune column on top of.
 	//It analyzes the adjacent blocks to determine if the sand block is on the edge of the biome or a cliff, and returns false if so.
 	public boolean areAllNeighborsGood (BlockPos.Mutable pos, BlockState surfaceBlock, BlockState underBlock, StructureWorldAccess world) {
-		return (isColumnGoodNeighbor(pos, Direction.NORTH, surfaceBlock, underBlock, world)
-			&& isColumnGoodNeighbor(pos, Direction.EAST, surfaceBlock, underBlock, world)
-			&& isColumnGoodNeighbor(pos, Direction.SOUTH, surfaceBlock, underBlock, world)
-			&& isColumnGoodNeighbor(pos, Direction.WEST, surfaceBlock, underBlock, world));
+		return (isColumnGoodNeighbor(pos, Direction.SOUTH, surfaceBlock, underBlock, world)
+			&& isColumnGoodNeighbor(pos, Direction.WEST, surfaceBlock, underBlock, world)
+			&& isColumnGoodNeighbor(pos, Direction.NORTH, surfaceBlock, underBlock, world)
+			&& isColumnGoodNeighbor(pos, Direction.EAST, surfaceBlock, underBlock, world));
 	}
 
 	//This method determines if there's a cliff edge or a non-Seared Dunes biome in a given space, which makes it a 'bad neighbor' for dune columns.
