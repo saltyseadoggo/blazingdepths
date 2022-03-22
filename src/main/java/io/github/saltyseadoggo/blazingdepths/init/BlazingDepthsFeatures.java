@@ -1,8 +1,8 @@
 package io.github.saltyseadoggo.blazingdepths.init;
 
 import io.github.saltyseadoggo.blazingdepths.features.DuneFeatureConfig;
+import io.github.saltyseadoggo.blazingdepths.features.NetherDuneFeature;
 import io.github.saltyseadoggo.blazingdepths.features.NonProtectedSimpleBlockStateProvider;
-import io.github.saltyseadoggo.blazingdepths.features.SearedDuneFeature;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
@@ -26,7 +26,7 @@ public class BlazingDepthsFeatures {
     //Features
     //Feature formatting can be referenced from Feature.class
     public static final Feature<DuneFeatureConfig> DUNE_FEATURE =
-            registerFeature("nether_dune_feature", new SearedDuneFeature(DuneFeatureConfig.CODEC.stable()));
+            registerFeature("nether_dune_feature", new NetherDuneFeature(DuneFeatureConfig.CODEC.stable()));
 
     //Configured Features
     //Configured feature formatting can be referenced from NetherConfiguredFeatures.class, or any other ___ConfiguredFeatures.class

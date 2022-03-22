@@ -1,18 +1,16 @@
 package io.github.saltyseadoggo.blazingdepths.features;
 
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
 import io.github.saltyseadoggo.blazingdepths.noise.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import com.mojang.serialization.Codec;
 
-public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
+public class SearedDuneTerrainFeature extends Feature<DuneFeatureConfig> {
 
 	//This class is what builds the Seared Dunes biome's namesake dunes.
 
@@ -27,7 +25,7 @@ public class SearedDuneFeature extends Feature<DuneFeatureConfig> {
 	double noiseMapXScale = 0.05;
 	double noiseMapZScale = 0.075;
 
-	public SearedDuneFeature(Codec<DuneFeatureConfig> configCodec) {
+	public SearedDuneTerrainFeature(Codec<DuneFeatureConfig> configCodec) {
         super(configCodec);
     }
 
