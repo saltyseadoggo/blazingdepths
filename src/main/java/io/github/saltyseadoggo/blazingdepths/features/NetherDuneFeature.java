@@ -55,12 +55,6 @@ public class NetherDuneFeature extends Feature<DuneFeatureConfig> {
         BlockState surfaceBlock = config.surfaceBlock().getBlockState(featureContext.getRandom(), pos);
         BlockState underBlock = config.underBlock().getBlockState(featureContext.getRandom(), pos);
 
-        //If the feature origin isn't on a surface or under block, cancel generation.
-        //TODO: Uncomment the last line and remove the one above it when the config blocks are set back to normal
-        BlockState state = world.getBlockState(featureContext.getOrigin());
-        if (state != BlazingDepthsBlocks.SEARED_SAND.getDefaultState()) return false;
-        //if (state != surfaceBlock) return false;
-
         //Choose a random height, length (the longer side) and width (the shorter side) for this dune.
         int duneHeight = new Random().nextInt((duneMaxHeight - duneMinHeight)) + duneMinHeight;
         int duneLength = new Random().nextInt((duneMaxLength - duneMinLength)) + duneMinLength;

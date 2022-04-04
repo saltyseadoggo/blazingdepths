@@ -8,10 +8,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
-import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
-import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
+import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
 
@@ -36,15 +33,13 @@ public class BlazingDepthsFeatures {
     //Configured feature formatting can be referenced from NetherConfiguredFeatures.class, or any other ___ConfiguredFeatures.class
     public static final RegistryEntry<ConfiguredFeature<DuneFeatureConfig, ?>> SEARED_DUNE =
             registerCFeature("seared_dune", DUNE_FEATURE, new DuneFeatureConfig(
-                    new NonProtectedSimpleBlockStateProvider(Blocks.SAND.getDefaultState()),
-                    new NonProtectedSimpleBlockStateProvider(Blocks.SANDSTONE.getDefaultState())));
+                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
+                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())));
 
     //Placed Features
-    //Placed feature formatting, as well as different PlacementModifiers, can be referenced from NetherPlacedFeatures.class, or any other ___PlacedFeatures.class
-    //If we actually use PlacementModifiers, reference the above class(es) on how to employ them. Intellij said I didn't need to initialize an empty array :p
-    //TODO: Find or ask Olivia for some sort of documentation for how the placement modifiers work. These ones are copied from the basalt column
     public static final RegistryEntry<PlacedFeature> SEARED_DUNE_PLACED =
-            registerPFeature("seared_dune", SEARED_DUNE, CountPlacementModifier.of(256), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, BiomePlacementModifier.of());
+            //Placement modifiers copied from the huge crimson fungus, see TreePlacedFeatures
+            registerPFeature("seared_dune", SEARED_DUNE, CountMultilayerPlacementModifier.of(8), BiomePlacementModifier.of());
 
     //The registry zone
     //Contains multipurpose registration methods that can register any feature we feed them
