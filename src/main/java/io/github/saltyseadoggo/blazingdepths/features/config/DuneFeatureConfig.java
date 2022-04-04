@@ -1,4 +1,4 @@
-package io.github.saltyseadoggo.blazingdepths.features;
+package io.github.saltyseadoggo.blazingdepths.features.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

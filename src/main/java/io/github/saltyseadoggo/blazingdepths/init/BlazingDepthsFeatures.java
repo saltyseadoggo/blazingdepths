@@ -1,6 +1,8 @@
 package io.github.saltyseadoggo.blazingdepths.init;
 
 import io.github.saltyseadoggo.blazingdepths.features.*;
+import io.github.saltyseadoggo.blazingdepths.features.config.DuneFeatureConfig;
+import io.github.saltyseadoggo.blazingdepths.features.config.FloatingSandFixerConfig;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;

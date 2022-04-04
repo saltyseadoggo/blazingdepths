@@ -36,7 +36,7 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
     public static class BlazingDepthsBiomeProvider extends Region {
         //The Terra Blender documentation uses the Mojang mappings class name ResourceLocation. With Yarn, it is Identifier.
         public BlazingDepthsBiomeProvider() {
-            super(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), RegionType.NETHER, 10);
+            super(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), RegionType.NETHER, 5);
         }
 
         //ResourceKey in the Terra Blender docs example is a Mojang mappings name; its Yarn name is RegistryKey.
