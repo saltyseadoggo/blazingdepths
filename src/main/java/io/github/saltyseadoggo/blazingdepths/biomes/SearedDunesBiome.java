@@ -64,7 +64,8 @@ public class SearedDunesBiome {
                 //Our own dune feature
             .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED)
                 //Nether cave carver
-            .carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
+                //TODO: Fully remove cave carver later
+            //.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.PATCH_FIRE)
                 //GLOWSTONE_EXTRA absolutely must come before GLOWSTONE, or the game crashes on the Create New World screen
