@@ -1,9 +1,7 @@
 package io.github.saltyseadoggo.blazingdepths.init;
 
-import io.github.saltyseadoggo.blazingdepths.features.DuneFeatureConfig;
-import io.github.saltyseadoggo.blazingdepths.features.NetherDuneFeature;
-import io.github.saltyseadoggo.blazingdepths.features.NonProtectedSimpleBlockStateProvider;
-import net.minecraft.block.Blocks;
+import io.github.saltyseadoggo.blazingdepths.features.*;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
@@ -12,6 +10,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
 
+@SuppressWarnings("depreciation")
 public class BlazingDepthsFeatures {
 
     //A 'feature' is an arrangement of blocks constructed by code.
@@ -24,15 +23,29 @@ public class BlazingDepthsFeatures {
     //Another word for a 'placed feature' could be 'generated feature' because it's what actually gets generated in the world.
     //Every 'placement modifier' has different options, and it's some few of them which is necessary for them to spawn correctly and nice looking
 
+    //Set the minimum and maximum heights of the dunes.
+    static UniformIntProvider duneHeight = UniformIntProvider.create(4, 7);
+    //Do the same for length (the longer side)...
+    static UniformIntProvider duneLength = UniformIntProvider.create(18, 24);
+    //... and the width (the shorter side).
+    static UniformIntProvider duneWidth = UniformIntProvider.create(10, 14);
+
     //Features
     //Feature formatting can be referenced from Feature.class
     public static final Feature<DuneFeatureConfig> DUNE_FEATURE =
             registerFeature("nether_dune_feature", new NetherDuneFeature(DuneFeatureConfig.CODEC.stable()));
+    public static final Feature<FloatingSandFixerConfig> FLOATING_SAND_FIXER_FEATURE =
+            registerFeature("floating_sand_fixer_feature", new FloatingSandFixerFeature(FloatingSandFixerConfig.CODEC.stable()));
 
     //Configured Features
     //Configured feature formatting can be referenced from NetherConfiguredFeatures.class, or any other ___ConfiguredFeatures.class
     public static final RegistryEntry<ConfiguredFeature<DuneFeatureConfig, ?>> SEARED_DUNE =
             registerCFeature("seared_dune", DUNE_FEATURE, new DuneFeatureConfig(
+                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
+                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState()),
+                    duneHeight, duneLength, duneWidth));
+    public static final RegistryEntry<ConfiguredFeature<FloatingSandFixerConfig, ?>> FLOATING_SEARED_SAND_FIXER =
+            registerCFeature("floating_seared_sand_fixer", FLOATING_SAND_FIXER_FEATURE, new FloatingSandFixerConfig(
                     new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
                     new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())));
 
@@ -40,6 +53,9 @@ public class BlazingDepthsFeatures {
     public static final RegistryEntry<PlacedFeature> SEARED_DUNE_PLACED =
             //Placement modifiers copied from the huge crimson fungus, see TreePlacedFeatures
             registerPFeature("seared_dune", SEARED_DUNE, CountMultilayerPlacementModifier.of(8), BiomePlacementModifier.of());
+    public static final RegistryEntry<PlacedFeature> FLOATING_SEARED_SAND_FIXER_PLACED =
+            //This feature does not need placement configs; the default generating once per chunk is fine
+            registerPFeature("floating_seared_sand_fixer", FLOATING_SEARED_SAND_FIXER);
 
     //The registry zone
     //Contains multipurpose registration methods that can register any feature we feed them

@@ -58,14 +58,14 @@ public class SearedDunesBiome {
             return builder.build();
     }
 
-    //Add various features to our biome to populate it with dunes, vegetation, ores, etc.
+    //Add the desired features to our biome to populate it with dunes, vegetation, ores, etc.
+    //While all other Nether biomes include the Nether cave carver, I deliberately excluded it from the Seared Dunes because caves ruined the look of the biome.
     public static GenerationSettings createGenerationSettings() {
         GenerationSettings.Builder builder = new GenerationSettings.Builder()
-                //Our own dune feature
+                //Dune feature
             .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED)
-                //Nether cave carver
-                //TODO: Fully remove cave carver later
-            //.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
+                //Floating sand fixer
+            .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.FLOATING_SEARED_SAND_FIXER_PLACED)
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.PATCH_FIRE)
                 //GLOWSTONE_EXTRA absolutely must come before GLOWSTONE, or the game crashes on the Create New World screen

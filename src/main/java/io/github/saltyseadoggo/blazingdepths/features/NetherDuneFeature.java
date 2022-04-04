@@ -1,6 +1,5 @@
 package io.github.saltyseadoggo.blazingdepths.features;
 
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -10,24 +9,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import com.mojang.serialization.Codec;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
 public class NetherDuneFeature extends Feature<DuneFeatureConfig> {
 
     //This class is what builds the Seared Dunes biome's namesake dunes.
-
-    //Set the minimum and maximum heights of the dunes.
-    final int duneMinHeight = 4;
-    final int duneMaxHeight = 7;
-    //Do the same for length (the longer side)...
-    final int duneMinLength = 18;
-    final int duneMaxLength = 24;
-    //... and the width (the shorter side).
-    final int duneMinWidth = 10;
-    final int duneMaxWidth = 14;
 
     public NetherDuneFeature(Codec<DuneFeatureConfig> configCodec) {
         super(configCodec);
@@ -54,11 +41,10 @@ public class NetherDuneFeature extends Feature<DuneFeatureConfig> {
         //Get the sand and sandstone blocks from the config
         BlockState surfaceBlock = config.surfaceBlock().getBlockState(featureContext.getRandom(), pos);
         BlockState underBlock = config.underBlock().getBlockState(featureContext.getRandom(), pos);
-
-        //Choose a random height, length (the longer side) and width (the shorter side) for this dune.
-        int duneHeight = new Random().nextInt((duneMaxHeight - duneMinHeight)) + duneMinHeight;
-        int duneLength = new Random().nextInt((duneMaxLength - duneMinLength)) + duneMinLength;
-        int duneWidth = new Random().nextInt((duneMaxWidth - duneMinWidth)) + duneMinWidth;
+        //Choose a random height, length (the longer side) and width (the shorter side) for this dune from the config.
+        int duneHeight = config.height().get(new Random());
+        int duneLength = config.length().get(new Random());
+        int duneWidth = config.width().get(new Random());
 
 
         //"Array Maker"
