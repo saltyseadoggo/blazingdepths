@@ -12,7 +12,6 @@ import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
 
-@SuppressWarnings("depreciation")
 public class BlazingDepthsFeatures {
 
     //A 'feature' is an arrangement of blocks constructed by code.
@@ -26,7 +25,7 @@ public class BlazingDepthsFeatures {
     //Every 'placement modifier' has different options, and it's some few of them which is necessary for them to spawn correctly and nice looking
 
     //Set the minimum and maximum heights of the dunes.
-    static UniformIntProvider duneHeight = UniformIntProvider.create(4, 7);
+    static UniformIntProvider duneHeight = UniformIntProvider.create(2, 7);
     //Do the same for length (the longer side)...
     static UniformIntProvider duneLength = UniformIntProvider.create(18, 24);
     //... and the width (the shorter side).

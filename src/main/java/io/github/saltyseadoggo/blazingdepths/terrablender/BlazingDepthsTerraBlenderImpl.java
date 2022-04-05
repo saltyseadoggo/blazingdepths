@@ -11,14 +11,13 @@ import com.mojang.datafixers.util.Pair;
 import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
 import io.github.saltyseadoggo.blazingdepths.surfacerules.BlazingDepthsSurfaceRules;
-import net.minecraft.world.biome.source.util.VanillaBiomeParameters;
 import terrablender.api.*;
 import terrablender.worldgen.TBSurfaceRuleData;
 
 import java.util.function.Consumer;
 
 public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
-    //As per Terra Blender's documentation, all of its shit has to be done in one class.
+    //As per Terra Blender's documentation, all of its functions have to be done in one class.
     //See: https://github.com/Glitchfiend/TerraBlender/wiki/Getting-started
 
     @Override
