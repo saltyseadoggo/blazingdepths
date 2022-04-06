@@ -9,6 +9,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 import java.util.List;
 
@@ -43,13 +44,13 @@ public class BlazingDepthsFeatures {
     //Configured feature formatting can be referenced from NetherConfiguredFeatures.class, or any other ___ConfiguredFeatures.class
     public static final RegistryEntry<ConfiguredFeature<DuneFeatureConfig, ?>> SEARED_DUNE =
             registerCFeature("seared_dune", DUNE_FEATURE, new DuneFeatureConfig(
-                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
-                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState()),
+                    BlockStateProvider.of(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
+                    BlockStateProvider.of(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState()),
                     duneHeight, duneLength, duneWidth));
     public static final RegistryEntry<ConfiguredFeature<FloatingSandFixerConfig, ?>> FLOATING_SEARED_SAND_FIXER =
             registerCFeature("floating_seared_sand_fixer", FLOATING_SAND_FIXER_FEATURE, new FloatingSandFixerConfig(
-                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
-                    new NonProtectedSimpleBlockStateProvider(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())));
+                    BlockStateProvider.of(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
+                    BlockStateProvider.of(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())));
 
     //Placed Features
     public static final RegistryEntry<PlacedFeature> SEARED_DUNE_PLACED =
