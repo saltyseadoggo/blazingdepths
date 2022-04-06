@@ -37,7 +37,7 @@ sourceSets {
 }
 
 repositories {
-	//For some fucking reason, Terra Blender shit can only be fetched from a Forge website?
+	//For some reason, Terra Blender can only be fetched from a Forge website?
 	maven { url = 'https://maven.minecraftforge.net/' }
 }
 

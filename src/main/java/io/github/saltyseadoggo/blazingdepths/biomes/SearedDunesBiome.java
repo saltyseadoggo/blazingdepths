@@ -74,6 +74,8 @@ public class SearedDunesBiome {
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.GLOWSTONE)
                 //TODO: replace with one that can generate under seared sandstone. Also consider making it have shorter, age 15 vines, and be more common
             .feature(GenerationStep.Feature.VEGETAL_DECORATION, NetherPlacedFeatures.WEEPING_VINES)
+                //TODO: replace with one that generates more often
+            .feature(GenerationStep.Feature.VEGETAL_DECORATION, NetherPlacedFeatures.PATCH_CRIMSON_ROOTS)
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, OrePlacedFeatures.ORE_MAGMA);
                 //TODO: basalt collumn reskin
                 //TODO: crimson roots
