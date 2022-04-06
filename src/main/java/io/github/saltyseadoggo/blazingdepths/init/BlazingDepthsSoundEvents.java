@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 
 public class BlazingDepthsSoundEvents {
     public static SoundEvent AMBIENT_SEARED_DUNES_LOOP = register(BlazingDepths.makeIdentifier("ambient.seared_dunes.loop"));
+	public static SoundEvent BLOCK_SEARED_SAND_COOL = register(BlazingDepths.makeIdentifier("block.seared_sand.cool"));
 
 	//Init event called by BlazingDepths.java. Just like in BlazingDepthsBiomes, calling an empty init event seems to run the code in the class.
     public static void init() {}

@@ -12,6 +12,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class BlazingDepthsFeatures {
 
     //A 'feature' is an arrangement of blocks constructed by code.
