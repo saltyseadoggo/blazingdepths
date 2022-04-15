@@ -22,6 +22,9 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                 StructureWorldAccess world = context.getWorld();
                 //Grab the feature config, which we need to get the blocks from
                 BigRootFeatureConfig config = context.getConfig();
+                //Grab the random from the feature context for use later.
+                //This is something I saw done in NetherForestVegetationFeature.
+                Random random = context.getRandom();
                 //Initialize the BlockPos we'll be using.
                 //We need to initialize this before we get the blocks from the config because, for some reason, getting said blocks requires a pos.
                 BlockPos.Mutable pos = new BlockPos.Mutable();
@@ -29,16 +32,22 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                 //Get the wart and roots blocks from the config
                 BlockState wartBlock = config.wartBlock().getBlockState(context.getRandom(), pos);
                 BlockState rootsBlock = config.rootsBlock().getBlockState(context.getRandom(), pos);
+                //Get the spread width and height from the config, used in roots generation
+                int spreadWidth = config.spreadWidth().get(random);
+                int spreadHeight = config.spreadHeight().get(random);
+
+                //"Big Root Grower"
+                //Builds the big root.
 
                 //Move pos to the feature origin, then move it two spaces away so the actual origin is centered on the 5x5 area the root generates in.
                 pos.set(context.getOrigin()).move(-2, 0, -2);
 
                 //Choose whether to swap x and z when building the root.
                 //Doing so rotates the finished product 90 degrees and flips it, creating additional variety.
-                boolean shouldMirrorAndRotate = new Random().nextBoolean();
+                boolean shouldMirrorAndRotate = random.nextBoolean();
 
                 //Choose a variant of the root structure to build
-                boolean[][][] rootMap = chooseRootMap();
+                boolean[][][] rootMap = chooseRootMap(random);
 
                 //Place blocks where the array says to
                 for (int y = 0; y < 5; y++) {
@@ -60,12 +69,31 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                         }
                 }
 
+                //"Root Layer"
+                //Adapted code from NetherForestVegetationFeature that spreads our `rootBlock` around the big root.
+
+                //Move pos back to the feature origin
+                pos.set(context.getOrigin());
+
+                int y = pos.getY();
+                if (y >= world.getBottomY() + 1 && y + 1 < world.getTopY()) {
+                        for(int k = 0; k < spreadWidth * spreadWidth; ++k) {
+                                //Choose a random position
+                                BlockPos pos3 = pos.add(random.nextInt(spreadWidth) - random.nextInt(spreadWidth),
+                                        random.nextInt(spreadHeight) - random.nextInt(spreadHeight),
+                                        random.nextInt(spreadWidth) - random.nextInt(spreadWidth));
+                                //If the random position is air and has a block underneath that can support our `rootsBlock`, place a `rootsBlock`
+                                if (world.isAir(pos3) && pos3.getY() > world.getBottomY() && rootsBlock.canPlaceAt(world, pos3)) {
+                                        world.setBlockState(pos3, rootsBlock, 2);
+                                }
+                        }
+                }
                 return true;
         }
 
         //To tell this feature how to generate the roots, this method "maps" out their arrangements of blocks in a 3D array.
         //In each of the array positions is a boolean. True means place a wart block, while false means do nothing.
-        public boolean[][][] chooseRootMap() {
+        public boolean[][][] chooseRootMap(Random random) {
                 //Initialize the 3D array which will contain our "map."
                 //The []'s are, in order, height, length (east to west) and width (north to south).
                 //All the indexes are set to false by default.
@@ -75,7 +103,7 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
 
                 //Each `case` here is a variant of the big root feature that I built in a Minecraft world and then manually mapped out.
                 //This code chooses a random variant, then "maps" out the occupied blocks in our array.
-                switch (new Random().nextInt(6)) {
+                switch (random.nextInt(6)) {
                         case 0 -> {
                                 rootMap[1][1][2] = true;        //Left branch
                                 rootMap[1][3][1] = true;        //Right branch

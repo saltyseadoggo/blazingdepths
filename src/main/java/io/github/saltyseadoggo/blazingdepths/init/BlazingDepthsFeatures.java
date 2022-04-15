@@ -5,6 +5,7 @@ import io.github.saltyseadoggo.blazingdepths.features.config.BigRootFeatureConfi
 import io.github.saltyseadoggo.blazingdepths.features.config.DuneFeatureConfig;
 import io.github.saltyseadoggo.blazingdepths.features.config.FloatingSandFixerConfig;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -58,7 +59,8 @@ public class BlazingDepthsFeatures {
     public static final RegistryEntry<ConfiguredFeature<BigRootFeatureConfig, ?>> BIG_CRIMSON_ROOT =
             registerCFeature("big_crimson_root", BIG_ROOT_FEATURE, new BigRootFeatureConfig(
                     BlockStateProvider.of(Blocks.NETHER_WART_BLOCK.getDefaultState()),
-                    BlockStateProvider.of(Blocks.CRIMSON_ROOTS.getDefaultState())));
+                    BlockStateProvider.of(Blocks.CRIMSON_ROOTS.getDefaultState()),
+                    ConstantIntProvider.create(6), ConstantIntProvider.create(8)));
 
     //Placed Features
     public static final RegistryEntry<PlacedFeature> SEARED_DUNE_PLACED =
