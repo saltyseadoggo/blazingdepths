@@ -63,18 +63,21 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
 
                 //Each `case` here is a variant of the big root feature that I built in a Minecraft world and then manually mapped out.
                 //This code chooses a random variant, then "maps" out the occupied blocks in our array.
-                switch(new Random().nextInt(6)) {
-                        case 0: rootMap[1][1][2] = true;        //Left branch
+                switch (new Random().nextInt(6)) {
+                        case 0 -> {
+                                rootMap[1][1][2] = true;        //Left branch
                                 rootMap[1][3][1] = true;        //Right branch
                                 rootMap[2][3][1] = true;
-                                break;
-                        case 1: rootMap[1][2][2] = true;        //Extended center
+                        }
+                        case 1 -> {
+                                rootMap[1][2][2] = true;        //Extended center
                                 rootMap[2][1][2] = true;        //Left branch
                                 rootMap[1][3][3] = true;        //Right branch
                                 rootMap[2][3][3] = true;
                                 rootMap[3][3][3] = true;
-                                break;
-                        case 2: rootMap[1][1][1] = true;        //Left branch
+                        }
+                        case 2 -> {
+                                rootMap[1][1][1] = true;        //Left branch
                                 rootMap[2][1][0] = true;                //Northern branch
                                 rootMap[2][0][2] = true;                //Southern branch
                                 rootMap[3][0][2] = true;
@@ -83,8 +86,9 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                                 rootMap[3][4][1] = true;                //Northern branch
                                 rootMap[4][4][1] = true;
                                 rootMap[3][3][3] = true;                //Southern branch
-                                break;
-                        case 3: rootMap[1][2][1] = true;        //Northern branch
+                        }
+                        case 3 -> {
+                                rootMap[1][2][1] = true;        //Northern branch
                                 rootMap[2][2][1] = true;
                                 rootMap[2][1][2] = true;                //Left branch
                                 rootMap[3][1][2] = true;
@@ -93,8 +97,9 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                                 rootMap[1][3][2] = true;        //Right branch
                                 rootMap[2][3][3] = true;
                                 rootMap[3][3][3] = true;
-                                break;
-                        case 4: rootMap[1][2][2] = true;        //Extended center
+                        }
+                        case 4 -> {
+                                rootMap[1][2][2] = true;        //Extended center
                                 rootMap[1][1][1] = true;        //Left branch
                                 rootMap[2][1][1] = true;
                                 rootMap[2][0][2] = true;                //Left branch
@@ -103,8 +108,9 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                                 rootMap[3][2][1] = true;                //Right branch
                                 rootMap[1][3][3] = true;        //Right branch
                                 rootMap[2][3][3] = true;
-                                break;
-                        case 5: rootMap[1][1][1] = true;        //Left branch
+                        }
+                        case 5 -> {
+                                rootMap[1][1][1] = true;        //Left branch
                                 rootMap[2][1][1] = true;
                                 rootMap[2][0][2] = true;                //Left branch
                                 rootMap[3][0][2] = true;
@@ -113,6 +119,7 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                                 rootMap[1][3][2] = true;        //Right branch
                                 rootMap[2][3][3] = true;
                                 rootMap[3][3][3] = true;
+                        }
                 }
                 return rootMap;
         }
