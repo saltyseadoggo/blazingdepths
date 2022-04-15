@@ -33,6 +33,10 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                 //Move pos to the feature origin, then move it two spaces away so the actual origin is centered on the 5x5 area the root generates in.
                 pos.set(context.getOrigin()).move(-2, 0, -2);
 
+                //Choose whether to swap x and z when building the root.
+                //Doing so rotates the finished product 90 degrees and flips it, creating additional variety.
+                boolean shouldMirrorAndRotate = new Random().nextBoolean();
+
                 //Choose a variant of the root structure to build
                 boolean[][][] rootMap = chooseRootMap();
 
@@ -41,9 +45,17 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
                         for (int x = 0; x < 5; x++) {
                                 for (int z = 0; z < 5; z++) {
                                         pos2.set(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                                        if (rootMap[y][x][z] && world.getBlockState(pos2).isAir()) {
-                                                world.setBlockState(pos2, wartBlock, 3);
+                                        if (shouldMirrorAndRotate) {
+                                                if (rootMap[y][z][x] && world.getBlockState(pos2).isAir()) {
+                                                        world.setBlockState(pos2, wartBlock, 3);
+                                                }
                                         }
+                                        else {
+                                                if (rootMap[y][x][z] && world.getBlockState(pos2).isAir()) {
+                                                        world.setBlockState(pos2, wartBlock, 3);
+                                                }
+                                        }
+
                                 }
                         }
                 }
