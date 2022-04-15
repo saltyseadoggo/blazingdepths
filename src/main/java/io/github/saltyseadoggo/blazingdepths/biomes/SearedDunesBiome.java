@@ -74,9 +74,10 @@ public class SearedDunesBiome {
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.GLOWSTONE)
                 //Big crimson roots and their surrounding small roots
             .feature(GenerationStep.Feature.VEGETAL_DECORATION, BlazingDepthsFeatures.BIG_CRIMSON_ROOT_PLACED)
+                //Magma blobs
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, OrePlacedFeatures.ORE_MAGMA);
                 //TODO: rare 'aurum' big roots with treasure
-                //TODO: use new 1.18.2 tags to make fortress, bastion remnant & ruined portal (custom with sand?) generate in our biome
+                //TODO: figure out what to do about ruined portals
 
         DefaultBiomeFeatures.addNetherMineables(builder);
         return builder.build();

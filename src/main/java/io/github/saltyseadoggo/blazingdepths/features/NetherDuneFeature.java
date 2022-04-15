@@ -47,6 +47,11 @@ public class NetherDuneFeature extends Feature<DuneFeatureConfig> {
         int duneLength = config.length().get(new Random());
         int duneWidth = config.width().get(new Random());
 
+        //If the feature origin isn't on top of seared sand, cancel generation.
+        //This stops dunes from generating on top of Nether fortresses and the like, which looks terrible.
+        pos.set(featureContext.getOrigin().getX(), featureY -1, featureContext.getOrigin().getZ());
+        if (world.getBlockState(pos) != surfaceBlock) return false;
+
 
         //"Array Maker"
         //Creates a 2D array containing the height of each column in the dune.
@@ -105,7 +110,8 @@ public class NetherDuneFeature extends Feature<DuneFeatureConfig> {
                 //If there's air at the bottom of the column, skip it, as there's a cliff edge in this column.
                 //Likewise, if there's lava at the bottom of the column, we're above the lava sea, so skip in that case as well.
                 pos.set(featureX + x, featureY -1, featureZ + z);
-                if (world.getBlockState(pos).isAir() || world.getBlockState(pos).isOf(Blocks.LAVA)) continue;
+                BlockState state = world.getBlockState(pos);
+                if (state.isAir() || state.isOf(Blocks.LAVA)) continue;
 
                 for (int h = 0; h < heightOfEachColumnArray[x][z]; h++) {
                     pos.set(featureX + x, featureY + h, featureZ + z);
