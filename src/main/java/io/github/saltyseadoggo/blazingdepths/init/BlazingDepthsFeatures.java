@@ -1,8 +1,10 @@
 package io.github.saltyseadoggo.blazingdepths.init;
 
 import io.github.saltyseadoggo.blazingdepths.features.*;
+import io.github.saltyseadoggo.blazingdepths.features.config.BigRootFeatureConfig;
 import io.github.saltyseadoggo.blazingdepths.features.config.DuneFeatureConfig;
 import io.github.saltyseadoggo.blazingdepths.features.config.FloatingSandFixerConfig;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -39,6 +41,8 @@ public class BlazingDepthsFeatures {
             registerFeature("nether_dune_feature", new NetherDuneFeature(DuneFeatureConfig.CODEC.stable()));
     public static final Feature<FloatingSandFixerConfig> FLOATING_SAND_FIXER_FEATURE =
             registerFeature("floating_sand_fixer_feature", new FloatingSandFixerFeature(FloatingSandFixerConfig.CODEC.stable()));
+    public static final Feature<BigRootFeatureConfig> BIG_ROOT_FEATURE =
+            registerFeature("big_root_feature", new BigRootFeature(BigRootFeatureConfig.CODEC.stable()));
 
     //Configured Features
     //Configured feature formatting can be referenced from NetherConfiguredFeatures.class, or any other ___ConfiguredFeatures.class
@@ -51,6 +55,10 @@ public class BlazingDepthsFeatures {
             registerCFeature("floating_seared_sand_fixer", FLOATING_SAND_FIXER_FEATURE, new FloatingSandFixerConfig(
                     BlockStateProvider.of(BlazingDepthsBlocks.SEARED_SAND.getDefaultState()),
                     BlockStateProvider.of(BlazingDepthsBlocks.SEARED_SANDSTONE.getDefaultState())));
+    public static final RegistryEntry<ConfiguredFeature<BigRootFeatureConfig, ?>> BIG_CRIMSON_ROOT =
+            registerCFeature("big_crimson_root", BIG_ROOT_FEATURE, new BigRootFeatureConfig(
+                    BlockStateProvider.of(Blocks.NETHER_WART_BLOCK.getDefaultState()),
+                    BlockStateProvider.of(Blocks.CRIMSON_ROOTS.getDefaultState())));
 
     //Placed Features
     public static final RegistryEntry<PlacedFeature> SEARED_DUNE_PLACED =
@@ -59,6 +67,9 @@ public class BlazingDepthsFeatures {
     public static final RegistryEntry<PlacedFeature> FLOATING_SEARED_SAND_FIXER_PLACED =
             //This feature does not need placement configs; the default generating once per chunk is fine
             registerPFeature("floating_seared_sand_fixer", FLOATING_SEARED_SAND_FIXER);
+    public static final RegistryEntry<PlacedFeature> BIG_CRIMSON_ROOT_PLACED =
+            //Placement modifiers copied from the huge crimson fungus, see TreePlacedFeatures
+            registerPFeature("big_crimson_root", BIG_CRIMSON_ROOT, CountMultilayerPlacementModifier.of(1), BiomePlacementModifier.of());
 
     //The registry zone
     //Contains multipurpose registration methods that can register any feature we feed them
