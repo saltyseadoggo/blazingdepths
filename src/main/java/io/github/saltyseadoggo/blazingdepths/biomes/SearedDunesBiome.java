@@ -72,16 +72,10 @@ public class SearedDunesBiome {
                 //TODO: Mixin these two features so they can generate under seared sandstone
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.GLOWSTONE_EXTRA)
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.GLOWSTONE)
-                //TODO: replace with one that can generate under seared sandstone. Also consider making it have shorter, age 15 vines, and be more common
-            .feature(GenerationStep.Feature.VEGETAL_DECORATION, NetherPlacedFeatures.WEEPING_VINES)
-                //TODO: replace with one that generates more often
-            .feature(GenerationStep.Feature.VEGETAL_DECORATION, NetherPlacedFeatures.PATCH_CRIMSON_ROOTS)
+                //Big crimson roots and their surrounding small roots
+            .feature(GenerationStep.Feature.VEGETAL_DECORATION, BlazingDepthsFeatures.BIG_CRIMSON_ROOT_PLACED)
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, OrePlacedFeatures.ORE_MAGMA);
-                //TODO: basalt collumn reskin
-                //TODO: crimson roots
-                //TODO: rare warped roots
-                //TODO: big crimson roots
-                //TODO: rare big warped roots
+                //TODO: rare 'aurum' big roots with treasure
                 //TODO: use new 1.18.2 tags to make fortress, bastion remnant & ruined portal (custom with sand?) generate in our biome
 
         DefaultBiomeFeatures.addNetherMineables(builder);

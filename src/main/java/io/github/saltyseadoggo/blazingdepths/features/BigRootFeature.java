@@ -77,7 +77,8 @@ public class BigRootFeature extends Feature<BigRootFeatureConfig> {
 
                 int y = pos.getY();
                 if (y >= world.getBottomY() + 1 && y + 1 < world.getTopY()) {
-                        for(int k = 0; k < spreadWidth * spreadWidth; ++k) {
+                        //64 is the number of attempts to place roots
+                        for(int k = 0; k < 64; ++k) {
                                 //Choose a random position
                                 BlockPos pos3 = pos.add(random.nextInt(spreadWidth) - random.nextInt(spreadWidth),
                                         random.nextInt(spreadHeight) - random.nextInt(spreadHeight),
