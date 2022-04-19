@@ -12,8 +12,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
+    //Mixins ItemStack's method that handles durability loss to subtract from 'bonus durability' applied by seared sealant first.
+
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
+
+    //The @Shadow lines are "shadowing" the `nbt` field and some methods from the ItemStack class, so we can use them here.
+    //For fields, we remove the `= whatever`.
+    //For methods, we remove the {} and everything within, and also make the method abstract.
+    //See: https://gist.github.com/TelepathicGrunt/3784f8a8b317bac11039474012de5fb4
 
     @Shadow
     private NbtCompound nbt;
@@ -41,6 +48,7 @@ public abstract class ItemStackMixin {
     }
 
     //Mixin the method that calculates durability loss to subtract from bonus durability before vanilla durability.
+    //For the rather complicated looking paths, just type in the desired method and IntelliJ will autocomplete.~
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), cancellable = true)
     public void blazingdepths_damageSealantFirst(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable cir) {
         if (getBonusDurability() != 0) {
@@ -48,7 +56,7 @@ public abstract class ItemStackMixin {
             int bonusDurability = this.getBonusDurability();
             int k;
             //If there's enough bonus durability to absorb the damage, subtract the damage from bonus durability and return false.
-            //By returning false, the vanilla code doesn't get a chance to add the damage to the vanilla `damage` value.
+            //By returning false, the vanilla code doesn't get a chance to add the damage to the vanilla `damage` nbt tag.
             if (bonusDurability >= amount) {
                 setBonusDurability(bonusDurability - amount);
                 cir.setReturnValue(false);
