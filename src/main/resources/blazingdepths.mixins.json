@@ -8,7 +8,9 @@
     "ItemStackMixin",
     "RootsBlockMixin"
   ],
-  "client": [],
+  "client": [
+    "ItemRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
