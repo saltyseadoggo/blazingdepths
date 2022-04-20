@@ -2,12 +2,10 @@ package io.github.saltyseadoggo.blazingdepths.mixin;
 
 import io.github.saltyseadoggo.blazingdepths.access.ItemStackAccess;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,26 +14,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
-    //Mixins ItemStack's method that handles durability loss to subtract from 'bonus durability' applied by seared sealant first.
+    //This class mixins ItemStack's method that handles durability loss to subtract from "bonus durability" applied by seared sealant first.
+    //It also adds some methods to ItemStack that are needed for our ItemRendererMixin to work.
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin implements ItemStackAccess {
 
-    //The @Shadow lines are "shadowing" the `nbt` field and some methods from the ItemStack class, so we can use them here.
-    //For fields, we remove the `= whatever`.
-    //For methods, we remove the {} and everything within, and also make the method abstract.
+    //The @Shadow lines are "shadowing" the fields and methods from the ItemStack class that we need to reference.
+    //For fields, we remove the `= whatever`. If the field is final, we also remove the final, then add @Final above the @Shadow.
+    //For methods, we remove the {} and everything within, and also make the method abstract. If the method is private, we make it protected instead.
     //See: https://gist.github.com/TelepathicGrunt/3784f8a8b317bac11039474012de5fb4
 
     @Shadow
     private NbtCompound nbt;
-
-    //When we shadow a final field, we remove `final` when we copy-paste, then add @Final above @Shadow.
-    @Final
-    @Shadow
-    private Item item;
-
-    @Shadow
-    public abstract NbtCompound getOrCreateNbt();
 
     @Shadow
     public abstract int getDamage();
@@ -46,21 +37,22 @@ public abstract class ItemStackMixin implements ItemStackAccess {
     @Shadow
     public abstract int getMaxDamage();
 
+    @Shadow public abstract void removeSubNbt(String key);
+
     //Returns the value of our own "BonusDurability" NBT tag.
     public int blazingdepths_getBonusDurability() {
         return this.nbt == null ? 0 : this.nbt.getInt("BonusDurability");
     }
 
     //Sets the value of our "BonusDurability" NBT tag.
+    //This value should never equal zero or less, so the lower bound for setting its value is one.
     public void blazingdepths_setBonusDurability(int value) {
-        this.getOrCreateNbt().putInt("BonusDurability", Math.max(0, value));
+        this.nbt.putInt("BonusDurability", Math.max(1, value));
     }
 
-    //"The durability bar zone"
-    //The next three methods are related to drawing the durability bar that shows how much bonus durability an item has.
+    //The next three methods define some values needed by our ItemRendererMixin to draw our custom durability bar.
 
-    //Returns true if the tool has more than 0 bonus durability.
-    //Functions as the bonus durability bar's equivalent of `isItemBarVisible`. Is also used in the `damage` method inject.
+    //Returns true if the item has the "BonusDurability" tag.
     public boolean blazingdepths_hasBonusDurability() {
         return blazingdepths_getBonusDurability() != 0;
     }
@@ -72,7 +64,7 @@ public abstract class ItemStackMixin implements ItemStackAccess {
 
     //Determines the width of the bonus durability bar based on how much bonus durability exists.
     public int blazingdepths_getBonusDurabilityBarStep() {
-        return Math.round((13.0f * (float) blazingdepths_getBonusDurability()) / (float) item.getMaxDamage());
+        return Math.round((13.0f * (float) blazingdepths_getBonusDurability()) / (float) getMaxDamage());
     }
 
     //Mixin the method that calculates durability loss to subtract from bonus durability before vanilla durability.
@@ -82,20 +74,26 @@ public abstract class ItemStackMixin implements ItemStackAccess {
         if (blazingdepths_hasBonusDurability()) {
             //Get the remaining bonus durability points.
             int bonusDurability = this.blazingdepths_getBonusDurability();
-            int k;
-            //If there's enough bonus durability to absorb the damage, subtract the damage from bonus durability and return false.
+
+            //If there's more than enough bonus durability to absorb the damage, subtract the damage from bonus durability and return false.
             //By returning false, the vanilla code doesn't get a chance to add the damage to the vanilla `damage` nbt tag.
-            if (bonusDurability >= amount) {
+            if (bonusDurability > amount) {
                 blazingdepths_setBonusDurability(bonusDurability - amount);
                 cir.setReturnValue(false);
             }
-            //If there isn't enough bonus durability to absorb the damage, get the amount of damage that can't be absorbed and add it to vanilla `damage`.
-            //Once again, we return to prevent the vanilla code from dealing the full damage.
             else {
-                blazingdepths_setBonusDurability(0);
-                k = this.getDamage() + (amount - bonusDurability);
-                this.setDamage(k);
-                cir.setReturnValue(k >= this.getMaxDamage());
+                //Otherwise, there is no more bonus durability left, so we remove the "BonusDurability" tag.
+                removeSubNbt("BonusDurability");
+                //If all of the damage was absorbed, we return false.
+                if (bonusDurability == amount) {
+                    cir.setReturnValue(false);
+                }
+                //If some damage was not absorbed, we deal that damage to the tool.
+                else {
+                    int remainder = this.getDamage() + (amount - bonusDurability);
+                    this.setDamage(remainder);
+                    cir.setReturnValue(remainder >= this.getMaxDamage());
+                }
             }
         }
     }
