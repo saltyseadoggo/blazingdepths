@@ -57,11 +57,6 @@ public abstract class ItemStackMixin implements ItemStackAccess {
         return blazingdepths_getBonusDurability() != 0;
     }
 
-    //Returns the bonus durability bar's color. Unlike the vanilla durability bar, ours is always a solid color.
-    public int blazingdepths_getBonusDurabilityBarColor() {
-        return BlazingDepthsBlocks.SearedSandDustColor;
-    }
-
     //Determines the width of the bonus durability bar based on how much bonus durability exists.
     public int blazingdepths_getBonusDurabilityBarStep() {
         return Math.round((13.0f * (float) blazingdepths_getBonusDurability()) / (float) getMaxDamage());
