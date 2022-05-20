@@ -1,4 +1,5 @@
 {
+  "biome.blazing_depths.seared_dunes": "Seared Dunes",
   "block.blazing_depths.seared_sand": "Seared Sand",
   "block.blazing_depths.seared_sandstone": "Seared Sandstone",
   "block.blazing_depths.seared_sandstone_slab": "Seared Sandstone Slab",
@@ -8,5 +9,8 @@
   "block.blazing_depths.smooth_seared_sandstone_slab": "Smooth Seared Sandstone Slab",
   "block.blazing_depths.smooth_seared_sandstone_stairs": "Smooth Seared Sandstone Stairs",
   "block.blazing_depths.smooth_seared_sandstone_wall": "Smooth Seared Sandstone Wall",
+  "item.blazing_depths.ancient_concoction": "Ancient Concoction",
+  "item.blazing_depths.seared_sealant": "Seared Sealant",
+  "item.blazing_depths.warped_root_extract": "Warped Root Extract",
   "itemGroup.blazing_depths.blazing_depths": "Blazing Depths"
 }

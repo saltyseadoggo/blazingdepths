@@ -2,7 +2,9 @@ package io.github.saltyseadoggo.blazingdepths.datagen;
 
 import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.datagen.api.LanguageDataProvider;
+import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
+import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsItems;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
@@ -130,7 +132,11 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 
 		@Override
 		protected void registerTranslations() {
+			//Creative Tab
 			this.add("itemGroup.blazing_depths.blazing_depths", "Blazing Depths");
+
+			//Biomes
+			this.addBiome(BlazingDepthsBiomes.SEARED_DUNES_KEY, "Seared Dunes");
 
 			//Seared Sand
 			this.addBlock(BlazingDepthsBlocks.SEARED_SAND, "Seared Sand");
@@ -146,6 +152,11 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			this.addBlock(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB, "Smooth Seared Sandstone Slab");
 			this.addBlock(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS, "Smooth Seared Sandstone Stairs");
 			this.addBlock(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL, "Smooth Seared Sandstone Wall");
+
+			//Ancient Concoction and its ingredients
+			this.addItem(BlazingDepthsItems.SEARED_SEALANT, "Seared Sealant");
+			this.addItem(BlazingDepthsItems.ANCIENT_CONCOCTION, "Ancient Concoction");
+			this.addItem(BlazingDepthsItems.WARPED_ROOT_EXTRACT, "Warped Root Extract");
 		}
 	}
 
