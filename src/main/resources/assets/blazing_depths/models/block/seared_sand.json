@@ -1,0 +1,20 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "blazing_depths:block/seared_sand",
+    "all": "blazing_depths:block/seared_sand"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [0, 16, 16, 0], "texture": "#all", "cullface": "down" },
+        "up":    { "texture": "#all", "cullface": "up" },
+        "north": { "uv": [16, 0, 0, 16], "texture": "#all", "cullface": "north" },
+        "south": { "texture": "#all", "cullface": "south" },
+        "west":  { "texture": "#all", "cullface": "west" },
+        "east":  { "uv": [16, 0, 0, 16], "texture": "#all", "cullface": "east" }
+      }
+    }
+  ]
+}

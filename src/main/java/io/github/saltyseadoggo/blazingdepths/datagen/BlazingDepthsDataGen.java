@@ -49,11 +49,11 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 		@Override
 		public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 			//Seared Sand
-			TexturedModel.Factory searedSandFactory = TexturedModel.CUBE_ALL.andThen(textures -> textures.put(TextureKey.ALL,
-					new Identifier(BlazingDepths.MOD_ID, "block/seared_sand")));
-			blockStateModelGenerator.registerSingleton(BlazingDepthsBlocks.SEARED_SAND, searedSandFactory);
-			blockStateModelGenerator.registerParentedItemModel(BlazingDepthsBlocks.SEARED_SAND,
-					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SAND));
+//			TexturedModel.Factory searedSandFactory = TexturedModel.CUBE_ALL.andThen(textures -> textures.put(TextureKey.ALL,
+//					new Identifier(BlazingDepths.MOD_ID, "block/seared_sand")));
+//			blockStateModelGenerator.registerSingleton(BlazingDepthsBlocks.SEARED_SAND, searedSandFactory);
+//			blockStateModelGenerator.registerParentedItemModel(BlazingDepthsBlocks.SEARED_SAND,
+//					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SAND));
 
 			//Seared Sandstone
 			TextureMap searedSandstoneTexture = new TextureMap()
