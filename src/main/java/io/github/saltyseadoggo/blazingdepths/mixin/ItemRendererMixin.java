@@ -42,7 +42,7 @@ public abstract class ItemRendererMixin {
                 this.renderGuiQuad(bufferBuilder, x + 2, y + 13, Math.min(13, i +1), 3, 0, 0, 0, 255);
             }
             else {
-                this.renderGuiQuad(bufferBuilder, x + 2, y + 15, i +1, 1, 0, 0, 0, 255);
+                this.renderGuiQuad(bufferBuilder, x + 2, y + 15, Math.min(13, i +1), 1, 0, 0, 0, 255);
             }
             //Draw the bonus durability bar. It is drawn in two halves, both with a different color.
             this.renderGuiQuad(bufferBuilder, x + 2, y + 13, i, 1,

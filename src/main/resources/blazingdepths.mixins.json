@@ -6,7 +6,8 @@
   "mixins": [
     "CarverMixin",
     "ItemStackMixin",
-    "RootsBlockMixin"
+    "RootsBlockMixin",
+    "SmithingScreenHandlerMixin"
   ],
   "client": [
     "ItemRendererMixin"

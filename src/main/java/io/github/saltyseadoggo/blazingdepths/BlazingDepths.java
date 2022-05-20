@@ -1,14 +1,11 @@
 package io.github.saltyseadoggo.blazingdepths;
 
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsFeatures;
+import io.github.saltyseadoggo.blazingdepths.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBiomes;
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsSoundEvents;
 
 public class BlazingDepths implements ModInitializer {
 	//Store the mod namespace here for use everywhere else
@@ -24,6 +21,7 @@ public class BlazingDepths implements ModInitializer {
 		//This is because BlazingDepthsBlocks sets the variable containing the fog color for the Seared Dunes biome.
 		BlazingDepthsSoundEvents.init();
 		BlazingDepthsBlocks.init();
+		BlazingDepthsItems.init();
 		BlazingDepthsFeatures.init();
 		BlazingDepthsBiomes.init();
 	}
