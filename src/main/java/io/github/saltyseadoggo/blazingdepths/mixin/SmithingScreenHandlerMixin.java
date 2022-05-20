@@ -74,6 +74,7 @@ public abstract class SmithingScreenHandlerMixin extends ForgingScreenHandler {
     @Inject(method = "onTakeOutput", at = @At(value = "HEAD"), cancellable = true)
     protected void onTakeOutput(PlayerEntity player, ItemStack stack, CallbackInfo ci) {
         if (canApplySealant()) {
+            //A line from the vanilla method. I don't know what it does.
             stack.onCraft(player.world, player, stack.getCount());
             //Decrement the first input slot as the vanilla method does.
             this.decrementStack(0);
@@ -81,6 +82,7 @@ public abstract class SmithingScreenHandlerMixin extends ForgingScreenHandler {
             ItemStack itemStack = this.input.getStack(1);
             itemStack.decrement(usedSealants);
             this.input.setStack(1, itemStack);
+            //A line from the vanilla method. I don't know what it does.
             this.context.run((world, pos) -> world.syncWorldEvent(WorldEvents.SMITHING_TABLE_USED, (BlockPos)pos, 0));
             ci.cancel();
         }

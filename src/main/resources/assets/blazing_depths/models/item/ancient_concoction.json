@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blazing_depths:item/ancient_concoction"
+  }
+}
