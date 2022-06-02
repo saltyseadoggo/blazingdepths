@@ -49,11 +49,12 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 		@Override
 		public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 			//Seared Sand
+			//now uses its own custom model, but I left its old datagen code here for future reference.~
 //			TexturedModel.Factory searedSandFactory = TexturedModel.CUBE_ALL.andThen(textures -> textures.put(TextureKey.ALL,
 //					new Identifier(BlazingDepths.MOD_ID, "block/seared_sand")));
 //			blockStateModelGenerator.registerSingleton(BlazingDepthsBlocks.SEARED_SAND, searedSandFactory);
-//			blockStateModelGenerator.registerParentedItemModel(BlazingDepthsBlocks.SEARED_SAND,
-//					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SAND));
+			blockStateModelGenerator.registerParentedItemModel(BlazingDepthsBlocks.SEARED_SAND,
+					ModelIds.getBlockModelId(BlazingDepthsBlocks.SEARED_SAND));
 
 			//Seared Sandstone
 			TextureMap searedSandstoneTexture = new TextureMap()
@@ -136,10 +137,10 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			this.add("itemGroup.blazing_depths.blazing_depths", "Blazing Depths");
 
 			//Bonus Durability tooltip
-			this.add("item.bonus_durability", "Bonus Durability");
+			this.add("item.blazing_depths.bonus_durability", "Bonus Durability");
 
 			//Subtitles
-			this.add("subtitles.block.seared_sand.cool", "Seared sand cools");
+			this.add("subtitles.blazing_depths.block.seared_sand.cool", "Seared sand cools");
 
 			//Biomes
 			this.addBiome(BlazingDepthsBiomes.SEARED_DUNES_KEY, "Seared Dunes");
@@ -163,6 +164,16 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			this.addItem(BlazingDepthsItems.SEARED_SEALANT, "Seared Sealant");
 			this.addItem(BlazingDepthsItems.ANCIENT_CONCOCTION, "Ancient Concoction");
 			this.addItem(BlazingDepthsItems.WARPED_ROOT_EXTRACT, "Warped Root Extract");
+
+			//REI info
+			this.add("info.blazing_depths.apply_sealant", """
+					Place seared sealant and any item with durability in a Smithing Table to apply the sealant, giving the item bonus durability that is consumed before vanilla durability.
+
+					Applying seared sealant to armor also makes it immune to damage from sandstorms until its bonus durability runs out.
+					
+					You may add more sealants to an item to add more bonus durability until its blue bar is full.
+					 
+					Bonus durability from seared sealant is affected by Unbreaking, but cannot be repaired by Mending.""");
 		}
 	}
 

@@ -39,6 +39,8 @@ sourceSets {
 repositories {
 	//For some reason, Terra Blender can only be fetched from a Forge website?
 	maven { url = 'https://maven.minecraftforge.net/' }
+	//Roughly Enough Items
+	maven { url = "https://maven.shedaniel.me" }
 }
 
 dependencies {
@@ -52,6 +54,11 @@ dependencies {
 
 	//Terra Blender. Needed to register and generate the biomes compatibly, and to apply surface rules.
 	modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.18.2-1.1.0.92'
+
+	//Roughly Enough Items
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
 }
 
 processResources {

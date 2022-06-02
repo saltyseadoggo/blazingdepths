@@ -9,10 +9,11 @@
   "block.blazing_depths.smooth_seared_sandstone_slab": "Smooth Seared Sandstone Slab",
   "block.blazing_depths.smooth_seared_sandstone_stairs": "Smooth Seared Sandstone Stairs",
   "block.blazing_depths.smooth_seared_sandstone_wall": "Smooth Seared Sandstone Wall",
+  "info.blazing_depths.apply_sealant": "Place seared sealant and any item with durability in a Smithing Table to apply the sealant, giving the item bonus durability that is consumed before vanilla durability.\n\nApplying seared sealant to armor also makes it immune to damage from sandstorms until its bonus durability runs out.\n\nYou may add more sealants to an item to add more bonus durability until its blue bar is full.\n\nBonus durability from seared sealant is affected by Unbreaking, but cannot be repaired by Mending.",
   "item.blazing_depths.ancient_concoction": "Ancient Concoction",
+  "item.blazing_depths.bonus_durability": "Bonus Durability",
   "item.blazing_depths.seared_sealant": "Seared Sealant",
   "item.blazing_depths.warped_root_extract": "Warped Root Extract",
   "itemGroup.blazing_depths.blazing_depths": "Blazing Depths",
-  "subtitles.block.seared_sand.cool": "Seared sand cools",
-  "item.bonus_durability": "Bonus Durability"
+  "subtitles.blazing_depths.block.seared_sand.cool": "Seared sand cools"
 }

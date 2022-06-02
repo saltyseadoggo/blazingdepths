@@ -20,6 +20,9 @@
     "main": [
       "io.github.saltyseadoggo.blazingdepths.BlazingDepths"
     ],
+    "rei_client": [
+      "io.github.saltyseadoggo.blazingdepths.rei.BlazingDepthsREIPlugin"
+    ],
     "terrablender": [
       "io.github.saltyseadoggo.blazingdepths.terrablender.BlazingDepthsTerraBlenderImpl"
     ],
