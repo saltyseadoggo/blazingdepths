@@ -12,5 +12,7 @@
   "item.blazing_depths.ancient_concoction": "Ancient Concoction",
   "item.blazing_depths.seared_sealant": "Seared Sealant",
   "item.blazing_depths.warped_root_extract": "Warped Root Extract",
-  "itemGroup.blazing_depths.blazing_depths": "Blazing Depths"
+  "itemGroup.blazing_depths.blazing_depths": "Blazing Depths",
+  "subtitles.block.seared_sand.cool": "Seared sand cools",
+  "item.bonus_durability": "Bonus Durability"
 }

@@ -1,10 +1,14 @@
 package io.github.saltyseadoggo.blazingdepths.mixin;
 
 import io.github.saltyseadoggo.blazingdepths.access.ItemStackAccess;
-import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
     //This class mixins ItemStack's method that handles durability loss to subtract from "bonus durability" applied by seared sealant first.
@@ -38,6 +44,8 @@ public abstract class ItemStackMixin implements ItemStackAccess {
     public abstract int getMaxDamage();
 
     @Shadow public abstract void removeSubNbt(String key);
+
+    @Shadow public abstract NbtCompound getOrCreateNbt();
 
     //Returns the value of our own "BonusDurability" NBT tag.
     public int blazingdepths_getBonusDurability() {

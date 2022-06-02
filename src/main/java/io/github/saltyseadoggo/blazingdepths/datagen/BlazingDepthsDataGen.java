@@ -135,6 +135,12 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			//Creative Tab
 			this.add("itemGroup.blazing_depths.blazing_depths", "Blazing Depths");
 
+			//Bonus Durability tooltip
+			this.add("item.bonus_durability", "Bonus Durability");
+
+			//Subtitles
+			this.add("subtitles.block.seared_sand.cool", "Seared sand cools");
+
 			//Biomes
 			this.addBiome(BlazingDepthsBiomes.SEARED_DUNES_KEY, "Seared Dunes");
 
