@@ -42,10 +42,12 @@ public class NetherDuneFeature extends Feature<DuneFeatureConfig> {
         //Get the sand and sandstone blocks from the config
         BlockState surfaceBlock = config.surfaceBlock().getBlockState(featureContext.getRandom(), pos);
         BlockState underBlock = config.underBlock().getBlockState(featureContext.getRandom(), pos);
+        //Grab the random instance from a feature context
+        Random random = featureContext.getRandom();
         //Choose a random height, length (the longer side) and width (the shorter side) for this dune from the config.
-        int duneHeight = config.height().get(new Random());
-        int duneLength = config.length().get(new Random());
-        int duneWidth = config.width().get(new Random());
+        int duneHeight = config.height().get(random);
+        int duneLength = config.length().get(random);
+        int duneWidth = config.width().get(random);
 
         //If the feature origin isn't on top of seared sand, cancel generation.
         //This stops dunes from generating on top of Nether fortresses and the like, which looks terrible.

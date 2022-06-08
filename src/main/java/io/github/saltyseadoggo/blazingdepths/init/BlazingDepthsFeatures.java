@@ -1,5 +1,6 @@
 package io.github.saltyseadoggo.blazingdepths.init;
 
+import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.features.*;
 import io.github.saltyseadoggo.blazingdepths.features.config.BigRootFeatureConfig;
 import io.github.saltyseadoggo.blazingdepths.features.config.DuneFeatureConfig;
@@ -82,12 +83,13 @@ public class BlazingDepthsFeatures {
         return Registry.register(Registry.FEATURE, name, feature);
     }
     //Configured feature registering method adapted from ConfiguredFeatures.class
-    public static <FC extends FeatureConfig, F extends Feature<FC>> RegistryEntry<ConfiguredFeature<FC, ?>> registerCFeature(String id, F feature, FC config) {
-        return BuiltinRegistries.method_40360(BuiltinRegistries.CONFIGURED_FEATURE, id, new ConfiguredFeature(feature, config));
+    public static <FC extends FeatureConfig, F extends Feature<FC>, C extends ConfiguredFeature<FC, ?>> RegistryEntry<C> registerCFeature(String id, F feature, FC config) {
+        return (RegistryEntry<C>) BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, BlazingDepths.makeIdentifier(id), new ConfiguredFeature<FC, F>(feature, config));
     }
+    
     //Placed feature registering methods adapted from PlacedFeatures.class
     public static RegistryEntry<PlacedFeature> registerPFeature(String id, RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry, List<PlacementModifier> modifiers) {
-        return BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, id, new PlacedFeature(RegistryEntry.upcast(registryEntry), List.copyOf(modifiers)));
+        return BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, BlazingDepths.makeIdentifier(id), new PlacedFeature(RegistryEntry.upcast(registryEntry), List.copyOf(modifiers)));
     }
     public static RegistryEntry<PlacedFeature> registerPFeature(String id, RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry, PlacementModifier... modifiers) {
         return registerPFeature(id, registryEntry, List.of(modifiers));
