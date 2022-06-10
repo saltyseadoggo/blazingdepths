@@ -1,7 +1,6 @@
 package io.github.saltyseadoggo.blazingdepths.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.saltyseadoggo.blazingdepths.access.ItemStackAccess;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
@@ -28,28 +27,27 @@ public abstract class ItemRendererMixin {
     //This code is largely adapted from the method it mixins.
     @Inject(method = "renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At("TAIL"))
     public void renderBonusDurabilityBar(TextRenderer renderer, ItemStack stack, int x, int y, String countLabel, CallbackInfo ci) {
-        //If we don't cast to (Object) here, a compile error crops up.
-        ItemStackAccess stack2 = (ItemStackAccess) (Object) stack;
-        if (stack2.blazingdepths_hasBonusDurability()) {
+        int bonusDurability = stack.getOrCreateNbt().getInt("BonusDurability");
+        if (bonusDurability != 0) {
             RenderSystem.disableDepthTest();
             RenderSystem.disableTexture();
             RenderSystem.disableBlend();
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferBuilder = tessellator.getBuffer();
-            int i = stack2.blazingdepths_getBonusDurabilityBarStep();
+            int w = Math.round((13.0f * (float) bonusDurability) / (float) stack.getMaxDamage());
             //Draw our addition to the black rectangle background drawn by the vanilla durability bar, or draw the whole thing if it's missing.
             if (!stack.isItemBarVisible()) {
-                this.renderGuiQuad(bufferBuilder, x + 2, y + 13, Math.min(13, i +1), 3, 0, 0, 0, 255);
+                this.renderGuiQuad(bufferBuilder, x + 2, y + 13, Math.min(13, w +1), 3, 0, 0, 0, 255);
             }
             else {
-                this.renderGuiQuad(bufferBuilder, x + 2, y + 15, Math.min(13, i +1), 1, 0, 0, 0, 255);
+                this.renderGuiQuad(bufferBuilder, x + 2, y + 15, Math.min(13, w +1), 1, 0, 0, 0, 255);
             }
             //Draw the bonus durability bar. It is drawn in two halves, both with a different color.
-            this.renderGuiQuad(bufferBuilder, x + 2, y + 13, i, 1,
+            this.renderGuiQuad(bufferBuilder, x + 2, y + 13, w, 1,
                     bonusDurabilityBarUpperColor >> 16 & 0xFF,
                     bonusDurabilityBarUpperColor >> 8 & 0xFF,
                     bonusDurabilityBarUpperColor & 0xFF, 255);
-            this.renderGuiQuad(bufferBuilder, x + 2, y + 14, i, 1,
+            this.renderGuiQuad(bufferBuilder, x + 2, y + 14, w, 1,
                     bonusDurabilityBarLowerColor >> 16 & 0xFF,
                     bonusDurabilityBarLowerColor >> 8 & 0xFF,
                     bonusDurabilityBarLowerColor & 0xFF, 255);

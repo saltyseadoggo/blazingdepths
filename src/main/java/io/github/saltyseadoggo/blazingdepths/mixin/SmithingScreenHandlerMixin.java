@@ -83,7 +83,7 @@ public abstract class SmithingScreenHandlerMixin extends ForgingScreenHandler {
             itemStack.decrement(usedSealants);
             this.input.setStack(1, itemStack);
             //A line from the vanilla method. I don't know what it does.
-            this.context.run((world, pos) -> world.syncWorldEvent(WorldEvents.SMITHING_TABLE_USED, (BlockPos)pos, 0));
+            this.context.run((world, pos) -> world.syncWorldEvent(WorldEvents.SMITHING_TABLE_USED, pos, 0));
             ci.cancel();
         }
 

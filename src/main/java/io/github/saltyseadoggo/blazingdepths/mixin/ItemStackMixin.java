@@ -1,14 +1,8 @@
 package io.github.saltyseadoggo.blazingdepths.mixin;
 
-import io.github.saltyseadoggo.blazingdepths.access.ItemStackAccess;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,15 +10,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
     //This class mixins ItemStack's method that handles durability loss to subtract from "bonus durability" applied by seared sealant first.
     //It also adds some methods to ItemStack that are needed for our ItemRendererMixin to work.
 
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin implements ItemStackAccess {
+public abstract class ItemStackMixin {
 
     //The @Shadow lines are "shadowing" the fields and methods from the ItemStack class that we need to reference.
     //For fields, we remove the `= whatever`. If the field is final, we also remove the final, then add @Final above the @Shadow.
@@ -45,8 +37,6 @@ public abstract class ItemStackMixin implements ItemStackAccess {
 
     @Shadow public abstract void removeSubNbt(String key);
 
-    @Shadow public abstract NbtCompound getOrCreateNbt();
-
     //Returns the value of our own "BonusDurability" NBT tag.
     public int blazingdepths_getBonusDurability() {
         return this.nbt == null ? 0 : this.nbt.getInt("BonusDurability");
@@ -58,23 +48,12 @@ public abstract class ItemStackMixin implements ItemStackAccess {
         this.nbt.putInt("BonusDurability", Math.max(1, value));
     }
 
-    //The next three methods define some values needed by our ItemRendererMixin to draw our custom durability bar.
-
-    //Returns true if the item has the "BonusDurability" tag.
-    public boolean blazingdepths_hasBonusDurability() {
-        return blazingdepths_getBonusDurability() != 0;
-    }
-
-    //Determines the width of the bonus durability bar based on how much bonus durability exists.
-    public int blazingdepths_getBonusDurabilityBarStep() {
-        return Math.round((13.0f * (float) blazingdepths_getBonusDurability()) / (float) getMaxDamage());
-    }
-
     //Mixin the method that calculates durability loss to subtract from bonus durability before vanilla durability.
     //For the rather complicated looking paths, just type in the desired method and IntelliJ will autocomplete.~
+    //CTRL-click CallbackInfoReturnable<Boolean> to find out why we need the <Boolean> part. Without it, we get warnings.
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), cancellable = true)
-    public void blazingdepths_damageSealantFirst(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable cir) {
-        if (blazingdepths_hasBonusDurability()) {
+    public void blazingdepths_damageSealantFirst(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
+        if (blazingdepths_getBonusDurability() != 0) {
             //Get the remaining bonus durability points.
             int bonusDurability = this.blazingdepths_getBonusDurability();
 
@@ -87,7 +66,7 @@ public abstract class ItemStackMixin implements ItemStackAccess {
             else {
                 //Otherwise, there is no more bonus durability left, so we remove the "BonusDurability" tag.
                 removeSubNbt("BonusDurability");
-                //If all of the damage was absorbed, we return false.
+                //If all the damage was absorbed, we return false.
                 if (bonusDurability == amount) {
                     cir.setReturnValue(false);
                 }
