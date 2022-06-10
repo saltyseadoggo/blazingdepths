@@ -142,6 +142,16 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			//Subtitles
 			this.add("subtitles.blazing_depths.block.seared_sand.cool", "Seared sand cools");
 
+			//Tooltips
+			this.add("item.blazing_depths.seared_sealant.tooltip", """
+					A sealant of ancient origin that, when applied to equipment, protects it from wear and tear.
+					Apply this in a smithing table to any item with durability to give it "bonus durability" that is consumed before vanilla durability.
+					For more information, view uses in REI.""");
+			this.add("item.blazing_depths.ancient_concoction.tooltip", """
+					A cracked vial containing an unknown chemical substance. The fluid inside seems to have anti-abrasive properties.
+					Brew Warped Resin into this in a brewing stand to create Seared Sealant.""");
+			this.add("tooltip.blazing_depths.more_info", "Hold [ALT] to view info");
+
 			//Biomes
 			this.addBiome(BlazingDepthsBiomes.SEARED_DUNES_KEY, "Seared Dunes");
 
