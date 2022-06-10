@@ -14,7 +14,7 @@ public class BlazingDepthsItems {
     public static final Item ANCIENT_CONCOCTION = register("ancient_concoction",
             new HoldKeyTooltipItem(new Item.Settings().group(BlazingDepths.CREATIVE_TAB).rarity(Rarity.UNCOMMON)));
     public static final Item WARPED_ROOT_EXTRACT = register("warped_root_extract",
-            new Item(new Item.Settings().group(BlazingDepths.CREATIVE_TAB)));
+            new HoldKeyTooltipItem(new Item.Settings().group(BlazingDepths.CREATIVE_TAB)));
 
     //Empty init method to make all the other code run
     public static void init() {}

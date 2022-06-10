@@ -15,6 +15,7 @@
   "item.blazing_depths.seared_sealant": "Seared Sealant",
   "item.blazing_depths.seared_sealant.tooltip": "A surface coating brewed according to ancient recipes that protects equipment from wear and tear.\nApply this in a smithing table to any item with durability to give it \"bonus durability\" that is consumed before vanilla durability.\nFor more information, view uses in REI.",
   "item.blazing_depths.warped_root_extract": "Warped Root Extract",
+  "item.blazing_depths.warped_root_extract.tooltip": "A dew-like fluid found inside of warped roots. If left exposed to air, it hardens and becomes clear.\nBrew this into Ancient Concoctions in a brewing stand to create Seared Sealant.",
   "itemGroup.blazing_depths.blazing_depths": "Blazing Depths",
   "subtitles.blazing_depths.block.seared_sand.cool": "Seared sand cools",
   "tooltip.blazing_depths.bonus_durability": "Bonus Durability",

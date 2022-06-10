@@ -171,6 +171,9 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			this.add("item.blazing_depths.ancient_concoction.tooltip", """
 					A cracked vial containing an unknown chemical substance. The fluid inside seems to have anti-abrasive properties.
 					Brew Warped Root Extract into this in a brewing stand to create Seared Sealant.""");
+			this.add("item.blazing_depths.warped_root_extract.tooltip", """
+					A dew-like fluid found inside of warped roots. If left exposed to air, it hardens and becomes clear.
+					Brew this into Ancient Concoctions in a brewing stand to create Seared Sealant.""");
 
 			//REI info
 			this.add("info.blazing_depths.apply_sealant", """
