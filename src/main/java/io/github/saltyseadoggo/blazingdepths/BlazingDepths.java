@@ -41,17 +41,27 @@ public class BlazingDepths implements ModInitializer {
 			//I could have instead used a parent class with the tooltip code for all tooltip having items to extend,
 			//but that would mean I couldn't have ArmorItems or whatever with tooltips, only basic Items.
 			if (stack.getItem() instanceof HoldKeyTooltip) {
-				//If ALT is being held, show the expanded tooltip; if it isn't being held, show a line telling the player to do so.
-				String key = Screen.hasAltDown() ?
-						stack.getTranslationKey() + ".tooltip" :
-						"tooltip.blazing_depths.more_info";
-				lines.add(new TranslatableText(key).formatted(Formatting.GRAY));
+				//If ALT isn't being held, show a line telling the player to do so.
+				if (!Screen.hasAltDown()) {
+					lines.add(new TranslatableText("tooltip.blazing_depths.more_info").formatted(Formatting.GRAY));
+				}
+				//If ALT is being held, show the item's expanded tooltip.
+				else {
+					//Generate the tooltip text's translation key from the item name
+					String key = stack.getTranslationKey() + ".tooltip";
+					//Minecraft doesn't handle \n correctly, so I had to implement \n recognition myself.
+					//This code splits each line of the string into a separate string, then adds them all to the item's tooltip.
+					String[] translatedTooltipLines = new TranslatableText(key).getString().split("\n");
+					for (String s : translatedTooltipLines) {
+						lines.add(new LiteralText(s).formatted(Formatting.GRAY));
+					}
+				}
 			}
 
 			//Make vanilla items with BonusDurability from seared sealant show their exact BonusDurability when advanced tooltips are on
 			int bonusDurability = stack.getOrCreateNbt().getInt("BonusDurability");
 			if (context.isAdvanced() && bonusDurability != 0) {
-				String label = new TranslatableText("item.bonus_durability").getString();
+				String label = new TranslatableText("tooltip.blazing_depths.bonus_durability").getString();
 				lines.add(new LiteralText(label + ": " + bonusDurability + " / " + stack.getMaxDamage()).formatted(Formatting.AQUA));
 			}
 		});

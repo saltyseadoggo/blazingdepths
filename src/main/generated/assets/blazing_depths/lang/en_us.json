@@ -9,14 +9,14 @@
   "block.blazing_depths.smooth_seared_sandstone_slab": "Smooth Seared Sandstone Slab",
   "block.blazing_depths.smooth_seared_sandstone_stairs": "Smooth Seared Sandstone Stairs",
   "block.blazing_depths.smooth_seared_sandstone_wall": "Smooth Seared Sandstone Wall",
-  "info.blazing_depths.apply_sealant": "Place seared sealant and any item with durability in a Smithing Table to apply the sealant, giving the item bonus durability that is consumed before vanilla durability.\n\nApplying seared sealant to armor also makes it immune to damage from sandstorms until its bonus durability runs out.\n\nYou may add more sealants to an item to add more bonus durability until its blue bar is full.\n\nBonus durability from seared sealant is affected by Unbreaking, but cannot be repaired by Mending.",
+  "info.blazing_depths.apply_sealant": "Place seared sealant and any item with durability in a Smithing Table to apply the sealant, giving the item bonus durability that is consumed before vanilla durability.\n\nApplying seared sealant to armor also makes it immune to damage from sandstorms. This effect lasts as long as the armor has bonus durability.\n\nYou may add more sealants to an item to add more bonus durability until its blue bar is full.\n\nBonus durability from seared sealant is affected by Unbreaking, but cannot be repaired by Mending.",
   "item.blazing_depths.ancient_concoction": "Ancient Concoction",
-  "item.blazing_depths.ancient_concoction.tooltip": "A cracked vial containing an unknown chemical substance. The fluid inside seems to have anti-abrasive properties.\nBrew Warped Resin into this in a brewing stand to create Seared Sealant.",
-  "item.blazing_depths.bonus_durability": "Bonus Durability",
+  "item.blazing_depths.ancient_concoction.tooltip": "A cracked vial containing an unknown chemical substance. The fluid inside seems to have anti-abrasive properties.\nBrew Warped Root Extract into this in a brewing stand to create Seared Sealant.",
   "item.blazing_depths.seared_sealant": "Seared Sealant",
-  "item.blazing_depths.seared_sealant.tooltip": "A sealant of ancient origin that, when applied to equipment, protects it from wear and tear.\nApply this in a smithing table to any item with durability to give it \"bonus durability\" that is consumed before vanilla durability.\nFor more information, view uses in REI.",
+  "item.blazing_depths.seared_sealant.tooltip": "A surface coating brewed according to ancient recipes that protects equipment from wear and tear.\nApply this in a smithing table to any item with durability to give it \"bonus durability\" that is consumed before vanilla durability.\nFor more information, view uses in REI.",
   "item.blazing_depths.warped_root_extract": "Warped Root Extract",
   "itemGroup.blazing_depths.blazing_depths": "Blazing Depths",
   "subtitles.blazing_depths.block.seared_sand.cool": "Seared sand cools",
+  "tooltip.blazing_depths.bonus_durability": "Bonus Durability",
   "tooltip.blazing_depths.more_info": "Hold [ALT] to view info"
 }

@@ -136,22 +136,6 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			//Creative Tab
 			this.add("itemGroup.blazing_depths.blazing_depths", "Blazing Depths");
 
-			//Bonus Durability tooltip
-			this.add("item.blazing_depths.bonus_durability", "Bonus Durability");
-
-			//Subtitles
-			this.add("subtitles.blazing_depths.block.seared_sand.cool", "Seared sand cools");
-
-			//Tooltips
-			this.add("item.blazing_depths.seared_sealant.tooltip", """
-					A sealant of ancient origin that, when applied to equipment, protects it from wear and tear.
-					Apply this in a smithing table to any item with durability to give it "bonus durability" that is consumed before vanilla durability.
-					For more information, view uses in REI.""");
-			this.add("item.blazing_depths.ancient_concoction.tooltip", """
-					A cracked vial containing an unknown chemical substance. The fluid inside seems to have anti-abrasive properties.
-					Brew Warped Resin into this in a brewing stand to create Seared Sealant.""");
-			this.add("tooltip.blazing_depths.more_info", "Hold [ALT] to view info");
-
 			//Biomes
 			this.addBiome(BlazingDepthsBiomes.SEARED_DUNES_KEY, "Seared Dunes");
 
@@ -175,15 +159,29 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			this.addItem(BlazingDepthsItems.ANCIENT_CONCOCTION, "Ancient Concoction");
 			this.addItem(BlazingDepthsItems.WARPED_ROOT_EXTRACT, "Warped Root Extract");
 
+			//Tooltips
+			this.add("tooltip.blazing_depths.more_info", "Hold [ALT] to view info");
+			this.add("tooltip.blazing_depths.bonus_durability", "Bonus Durability");
+			this.add("item.blazing_depths.seared_sealant.tooltip", """
+					A surface coating brewed according to ancient recipes that protects equipment from wear and tear.
+					Apply this in a smithing table to any item with durability to give it "bonus durability" that is consumed before vanilla durability.
+					For more information, view uses in REI.""");
+			this.add("item.blazing_depths.ancient_concoction.tooltip", """
+					A cracked vial containing an unknown chemical substance. The fluid inside seems to have anti-abrasive properties.
+					Brew Warped Root Extract into this in a brewing stand to create Seared Sealant.""");
+
 			//REI info
 			this.add("info.blazing_depths.apply_sealant", """
 					Place seared sealant and any item with durability in a Smithing Table to apply the sealant, giving the item bonus durability that is consumed before vanilla durability.
 
-					Applying seared sealant to armor also makes it immune to damage from sandstorms until its bonus durability runs out.
+					Applying seared sealant to armor also makes it immune to damage from sandstorms. This effect lasts as long as the armor has bonus durability.
 					
 					You may add more sealants to an item to add more bonus durability until its blue bar is full.
 					 
 					Bonus durability from seared sealant is affected by Unbreaking, but cannot be repaired by Mending.""");
+
+			//Subtitles
+			this.add("subtitles.blazing_depths.block.seared_sand.cool", "Seared sand cools");
 		}
 	}
 
