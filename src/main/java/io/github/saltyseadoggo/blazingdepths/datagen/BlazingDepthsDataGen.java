@@ -20,6 +20,8 @@ import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
@@ -266,15 +268,19 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 
 		@Override
 		protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+			//Seared Sandstone (slab, stairs, wall)
 			ShapedRecipeJsonBuilder.create(BlazingDepthsBlocks.SEARED_SANDSTONE).input('#', BlazingDepthsBlocks.SEARED_SAND).pattern("##").pattern("##")
 					.criterion("has_seared_sand", conditionsFromItem(BlazingDepthsBlocks.SEARED_SAND)).offerTo(exporter);
-			createSlabRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE)).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
-			createStairsRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE)).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
+			createSlabRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE))
+					.criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
+			createStairsRecipe(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE))
+					.criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			offerWallRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SEARED_SANDSTONE);
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB, BlazingDepthsBlocks.SEARED_SANDSTONE, 2);
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS, BlazingDepthsBlocks.SEARED_SANDSTONE);
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SEARED_SANDSTONE);
 
+			//Smooth Seared Sandstone (slab, stairs, wall)
 			CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(BlazingDepthsBlocks.SEARED_SANDSTONE), BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE.asItem(), 0.1F, 200).criterion("has_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SEARED_SANDSTONE)).offerTo(exporter);
 			createSlabRecipe(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB, Ingredient.ofItems(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).criterion("has_smooth_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).offerTo(exporter);
 			createStairsRecipe(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS, Ingredient.ofItems(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).criterion("has_smooth_seared_sandstone", conditionsFromItem(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)).offerTo(exporter);
@@ -282,6 +288,11 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE, 2);
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE);
 			offerStonecuttingRecipe(exporter, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL, BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE);
+
+			//Warped Root Extract
+			ShapelessRecipeJsonBuilder.create(BlazingDepthsItems.WARPED_ROOT_EXTRACT)
+					.input(Items.GLASS_BOTTLE).input(Items.WARPED_ROOTS).input(Items.WARPED_ROOTS).input(Items.WARPED_ROOTS).input(Items.WARPED_ROOTS)
+					.criterion("has_warped_roots", conditionsFromItem(Items.WARPED_ROOTS)).offerTo(exporter);
 		}
 
 	}
