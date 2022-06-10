@@ -219,15 +219,26 @@ public class BlazingDepthsDataGen implements DataGeneratorEntrypoint {
 
 		@Override
 		protected void generateTags() {
-			this.getOrCreateTagBuilder(BlockTags.STAIRS).
-					add(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS).
-					add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS);
-			this.getOrCreateTagBuilder(BlockTags.SLABS).
-					add(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB).
-					add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB);
-			this.getOrCreateTagBuilder(BlockTags.WALLS).
-					add(BlazingDepthsBlocks.SEARED_SANDSTONE_WALL).
-					add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL);
+			this.getOrCreateTagBuilder(BlockTags.STAIRS)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS);
+			this.getOrCreateTagBuilder(BlockTags.SLABS)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB);
+			this.getOrCreateTagBuilder(BlockTags.WALLS)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE_WALL)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL);
+			this.getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE_SLAB)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE_STAIRS)
+					.add(BlazingDepthsBlocks.SEARED_SANDSTONE_WALL)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_SLAB)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_STAIRS)
+					.add(BlazingDepthsBlocks.SMOOTH_SEARED_SANDSTONE_WALL);
+			this.getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
+					.add(BlazingDepthsBlocks.SEARED_SAND);
 		}
 
 	}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "blazing_depths:seared_sandstone",
+    "blazing_depths:seared_sandstone_slab",
+    "blazing_depths:seared_sandstone_stairs",
+    "blazing_depths:seared_sandstone_wall",
+    "blazing_depths:smooth_seared_sandstone",
+    "blazing_depths:smooth_seared_sandstone_slab",
+    "blazing_depths:smooth_seared_sandstone_stairs",
+    "blazing_depths:smooth_seared_sandstone_wall"
+  ]
+}
