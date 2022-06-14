@@ -7,7 +7,7 @@ import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
     //Roughly Enough Items plugin to add information for some of our items.
 
@@ -18,7 +18,7 @@ public class BlazingDepthsREIPlugin implements REIClientPlugin {
     }
 
     private void addInfo(DisplayRegistry registry, ItemConvertible item, String infoKey){
-        registry.add(DefaultInformationDisplay.createFromEntry(EntryStacks.of(item), Text.translatable(item.asItem().getTranslationKey()))
-                .line(Text.translatable("info." + BlazingDepths.MOD_ID + "." + infoKey)));
+        registry.add(DefaultInformationDisplay.createFromEntry(EntryStacks.of(item),new TranslatableText(item.asItem().getTranslationKey()))
+                .line(new TranslatableText("info." + BlazingDepths.MOD_ID + "." + infoKey)));
     }
 }

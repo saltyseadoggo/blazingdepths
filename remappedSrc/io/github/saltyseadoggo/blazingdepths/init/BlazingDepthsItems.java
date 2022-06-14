@@ -4,6 +4,7 @@ import io.github.saltyseadoggo.blazingdepths.BlazingDepths;
 import io.github.saltyseadoggo.blazingdepths.items.HoldKeyTooltipItem;
 import io.github.saltyseadoggo.blazingdepths.items.SearedSealantItem;
 import net.minecraft.item.Item;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 

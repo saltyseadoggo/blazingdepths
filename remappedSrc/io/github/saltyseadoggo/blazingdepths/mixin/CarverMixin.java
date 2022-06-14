@@ -3,7 +3,6 @@ package io.github.saltyseadoggo.blazingdepths.mixin;
 import io.github.saltyseadoggo.blazingdepths.init.BlazingDepthsBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.carver.Carver;
-import net.minecraft.world.gen.carver.CarverConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,11 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //I then came up with this solution: canAlwaysCarveBlock will check if the block is one of our carvable blocks, and preemptively return true if it is.
 
 @Mixin(Carver.class)
-public abstract class CarverMixin<C extends CarverConfig> {
+public abstract class CarverMixin {
 
     //cancellable = true is important to prevent a crash.
     @Inject(method = "canAlwaysCarveBlock", at = @At("RETURN"), cancellable = true)
-    public void addBDCarvables(C config, BlockState state, CallbackInfoReturnable<Boolean> cir) {
+    public void addBDCarvables(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         //When we get more terrain blocks, perhaps we can make a carvable list of our own, and have this if statement check for any of its contents.
         if (state.isOf(BlazingDepthsBlocks.SEARED_SAND) || state.isOf(BlazingDepthsBlocks.SEARED_SANDSTONE)) {
             cir.setReturnValue(true);

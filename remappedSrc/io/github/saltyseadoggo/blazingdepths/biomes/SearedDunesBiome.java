@@ -28,6 +28,7 @@ public class SearedDunesBiome {
     public static Biome create() {
 		return (new Biome.Builder())
             .precipitation(Biome.Precipitation.NONE)
+            .category(Biome.Category.NETHER)
             //TODO: Compare this with vanilla deserts and increase the temperature accordingly
             .temperature(2.0F)
             .downfall(0.0F)

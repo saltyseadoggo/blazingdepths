@@ -3,13 +3,14 @@ package io.github.saltyseadoggo.blazingdepths.mixin;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
     //This class mixins ItemStack's method that handles durability loss to subtract from "bonus durability" applied by seared sealant first.
     //It also adds some methods to ItemStack that are needed for our ItemRendererMixin to work.
@@ -50,7 +51,7 @@ public abstract class ItemStackMixin {
     //Mixin the method that calculates durability loss to subtract from bonus durability before vanilla durability.
     //For the rather complicated looking paths, just type in the desired method and IntelliJ will autocomplete.~
     //CTRL-click CallbackInfoReturnable<Boolean> to find out why we need the <Boolean> part. Without it, we get warnings.
-    @Inject(method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), cancellable = true)
+    @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), cancellable = true)
     public void blazingdepths_damageSealantFirst(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
         if (blazingdepths_getBonusDurability() != 0) {
             //Get the remaining bonus durability points.

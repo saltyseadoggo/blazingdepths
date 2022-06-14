@@ -8,7 +8,8 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
@@ -40,7 +41,7 @@ public class BlazingDepths implements ModInitializer {
 			if (stack.getItem() instanceof HoldKeyTooltip) {
 				//If ALT isn't being held, show a line telling the player to do so.
 				if (!Screen.hasAltDown()) {
-					lines.add(Text.translatable("tooltip.blazing_depths.more_info").formatted(Formatting.GRAY));
+					lines.add(new TranslatableText("tooltip.blazing_depths.more_info").formatted(Formatting.GRAY));
 				}
 				//If ALT is being held, show the item's expanded tooltip.
 				else {
@@ -48,9 +49,9 @@ public class BlazingDepths implements ModInitializer {
 					String key = stack.getTranslationKey() + ".tooltip";
 					//Minecraft doesn't handle \n correctly, so I had to implement \n recognition myself.
 					//This code splits each line of the string into a separate string, then adds them all to the item's tooltip.
-					String[] translatedTooltipLines = Text.translatable(key).getString().split("\n");
+					String[] translatedTooltipLines = new TranslatableText(key).getString().split("\n");
 					for (String s : translatedTooltipLines) {
-						lines.add(Text.literal(s).formatted(Formatting.GRAY));
+						lines.add(new LiteralText(s).formatted(Formatting.GRAY));
 					}
 				}
 			}
@@ -58,8 +59,8 @@ public class BlazingDepths implements ModInitializer {
 			//Make vanilla items with BonusDurability from seared sealant show their exact BonusDurability when advanced tooltips are on
 			int bonusDurability = stack.getOrCreateNbt().getInt("BonusDurability");
 			if (context.isAdvanced() && bonusDurability != 0) {
-				String label = Text.translatable("tooltip.blazing_depths.bonus_durability").getString();
-				lines.add(Text.literal(label + ": " + bonusDurability + " / " + stack.getMaxDamage()).formatted(Formatting.AQUA));
+				String label = new TranslatableText("tooltip.blazing_depths.bonus_durability").getString();
+				lines.add(new LiteralText(label + ": " + bonusDurability + " / " + stack.getMaxDamage()).formatted(Formatting.AQUA));
 			}
 		});
 	}
