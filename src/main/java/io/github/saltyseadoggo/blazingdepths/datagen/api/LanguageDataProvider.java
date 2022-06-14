@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataCache;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.DataWriter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -75,13 +76,13 @@ public abstract class LanguageDataProvider implements DataProvider {
 	protected abstract void registerTranslations();
 
 	@Override
-	public void run(@NotNull DataCache cache) {
+	public void run(@NotNull DataWriter cache) {
 		this.registerTranslations();
 
 		Path path = this.dataGenerator.getOutput().resolve("assets/" + this.modId + "/lang/" + this.locale + ".json");
 		try {
 			JsonElement json = GSON.toJsonTree(this.data);
-			DataProvider.writeToPath(GSON, cache, json, path);
+			DataProvider.writeToPath(cache, json, path);
 		} catch (IOException e) {
 			LOGGER.error("Couldn't save {}", path, e);
 		}

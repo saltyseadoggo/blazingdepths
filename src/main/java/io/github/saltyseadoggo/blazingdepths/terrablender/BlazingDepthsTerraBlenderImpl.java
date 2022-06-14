@@ -23,7 +23,7 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
     @Override
     public void onTerraBlenderInitialized() {
         //Register our biome provider containing our biomes
-        Regions.register(new BlazingDepthsBiomeProvider());
+        Regions.register(new BlazingDepthsNetherRegion());
         //Add our surface rules
         SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK,
                 1, BlazingDepthsSurfaceRules.makeRules());
@@ -32,10 +32,10 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
     }
 
     //Class in a class? I didn't know this was possible but this is how the Terra Blender docs say to do it.
-    public static class BlazingDepthsBiomeProvider extends Region {
+    public static class BlazingDepthsNetherRegion extends Region {
         //The Terra Blender documentation uses the Mojang mappings class name ResourceLocation. With Yarn, it is Identifier.
-        public BlazingDepthsBiomeProvider() {
-            super(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), RegionType.NETHER, 5);
+        public BlazingDepthsNetherRegion() {
+            super(BlazingDepths.makeIdentifier("biome_provider"), RegionType.NETHER, 5);
         }
 
         //ResourceKey in the Terra Blender docs example is a Mojang mappings name; its Yarn name is RegistryKey.
