@@ -76,13 +76,13 @@ public abstract class LanguageDataProvider implements DataProvider {
 	protected abstract void registerTranslations();
 
 	@Override
-	public void run(@NotNull DataWriter cache) {
+	public void run(@NotNull DataWriter writer) {
 		this.registerTranslations();
 
 		Path path = this.dataGenerator.getOutput().resolve("assets/" + this.modId + "/lang/" + this.locale + ".json");
 		try {
 			JsonElement json = GSON.toJsonTree(this.data);
-			DataProvider.writeToPath(cache, json, path);
+			DataProvider.writeToPath(writer, json, path);
 		} catch (IOException e) {
 			LOGGER.error("Couldn't save {}", path, e);
 		}

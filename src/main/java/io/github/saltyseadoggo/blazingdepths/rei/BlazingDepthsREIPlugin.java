@@ -9,7 +9,7 @@ import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.text.Text;
 
-    //Roughly Enough Items plugin to add information for some of our items.
+//Roughly Enough Items plugin to add information for some of our items.
 
 public class BlazingDepthsREIPlugin implements REIClientPlugin {
     @Override
