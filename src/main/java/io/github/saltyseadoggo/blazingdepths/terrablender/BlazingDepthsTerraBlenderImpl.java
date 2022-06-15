@@ -41,12 +41,8 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
         //ResourceKey in the Terra Blender docs example is a Mojang mappings name; its Yarn name is RegistryKey.
         @Override
         public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
-            this.addBiome(mapper,
-                    //Temperature, humidity (unused by Nether biomes), continentalness (unused by Nether biomes)
-                    MultiNoiseUtil.ParameterRange.of(0.3F), MultiNoiseUtil.ParameterRange.of(0.0F), MultiNoiseUtil.ParameterRange.of(0.0F),
-                    //Erosion, weirdness, depth (all unused by Nether biomes)
-                    MultiNoiseUtil.ParameterRange.of(0.0F), MultiNoiseUtil.ParameterRange.of(0.0F), MultiNoiseUtil.ParameterRange.of(0.0F),
-                    0.0F, BlazingDepthsBiomes.SEARED_DUNES_KEY);
+            this.addBiome(mapper, MultiNoiseUtil.createNoiseHypercube(0.3f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f),
+                    BlazingDepthsBiomes.SEARED_DUNES_KEY);
         }
     }
 }

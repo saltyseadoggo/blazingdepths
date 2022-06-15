@@ -64,10 +64,10 @@ public class SearedDunesBiome {
             .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED)
                 //Floating sand fixer
             .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.FLOATING_SEARED_SAND_FIXER_PLACED)
+                //TODO: Patch fire, glowstone and glowstone extra aren't generating on our blocks. Mixin or remove them
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.PATCH_FIRE)
                 //GLOWSTONE_EXTRA absolutely must come before GLOWSTONE, or the game crashes on the Create New World screen
-                //TODO: Mixin these two features so they can generate under seared sandstone
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.GLOWSTONE_EXTRA)
             .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, NetherPlacedFeatures.GLOWSTONE)
                 //Big crimson roots and their surrounding small roots
