@@ -1,6 +1,5 @@
 package io.github.saltyseadoggo.blazingdepths.terrablender;
 
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -35,13 +34,13 @@ public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
     public static class BlazingDepthsBiomeProvider extends Region {
         //The Terra Blender documentation uses the Mojang mappings class name ResourceLocation. With Yarn, it is Identifier.
         public BlazingDepthsBiomeProvider() {
-            super(new Identifier(BlazingDepths.MOD_ID, "biome_provider"), RegionType.NETHER, 5);
+            super(BlazingDepths.makeIdentifier("biome_provider"), RegionType.NETHER, 5);
         }
 
         //ResourceKey in the Terra Blender docs example is a Mojang mappings name; its Yarn name is RegistryKey.
         @Override
         public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
-            this.addBiome(mapper, MultiNoiseUtil.createNoiseHypercube(0.3f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f),
+            this.addBiome(mapper, MultiNoiseUtil.createNoiseHypercube(0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f),
                     BlazingDepthsBiomes.SEARED_DUNES_KEY);
         }
     }
