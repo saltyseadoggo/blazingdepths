@@ -60,15 +60,15 @@ public class SearedDunesBiome {
     //Add the desired features to our biome to populate it with dunes, vegetation, ores, etc.
     //While all other Nether biomes include the Nether cave carver, I deliberately excluded it from the Seared Dunes because caves ruined the look of the biome.
     public static GenerationSettings createGenerationSettings() {
-        GenerationSettings.Builder builder = new GenerationSettings.Builder();
+        GenerationSettings.Builder builder = new GenerationSettings.Builder()
                 //Dune feature
-            //.feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED)
+            .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.SEARED_DUNE_PLACED)
                 //Floating sand fixer
-            //.feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.FLOATING_SEARED_SAND_FIXER_PLACED)
+            .feature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, BlazingDepthsFeatures.FLOATING_SEARED_SAND_FIXER_PLACED)
                 //Big crimson roots and their surrounding small roots
-            //.feature(GenerationStep.Feature.VEGETAL_DECORATION, BlazingDepthsFeatures.BIG_CRIMSON_ROOT_PLACED)
+            .feature(GenerationStep.Feature.VEGETAL_DECORATION, BlazingDepthsFeatures.BIG_CRIMSON_ROOT_PLACED)
                 //Magma blobs
-            //.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, OrePlacedFeatures.ORE_MAGMA);
+            .feature(GenerationStep.Feature.UNDERGROUND_DECORATION, OrePlacedFeatures.ORE_MAGMA);
 
                 //The order of these features is apparently sensitive. Reordering them might cause the game to crash on the Create New World screen.
                 //GLOWSTONE_EXTRA absolutely must come before GLOWSTONE, or the game crashes on the Create New World screen
@@ -80,16 +80,16 @@ public class SearedDunesBiome {
                 //TODO: rarer warped roots
                 //TODO: figure out what to do about ruined portals
 
-        //DefaultBiomeFeatures.addNetherMineables(builder);
+        DefaultBiomeFeatures.addNetherMineables(builder);
         return builder.build();
     }
 
     //Configure what mobs can spawn in our biome.
     public static SpawnSettings createSpawnSettings() {
-        SpawnSettings.Builder builder = new SpawnSettings.Builder();
-            //.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 40, 1, 1))
-            //.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 100, 2, 5))
-            //.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+        SpawnSettings.Builder builder = new SpawnSettings.Builder()
+            .spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 40, 1, 1))
+            .spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 100, 2, 5))
+            .spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
 
         return builder.build();
     }

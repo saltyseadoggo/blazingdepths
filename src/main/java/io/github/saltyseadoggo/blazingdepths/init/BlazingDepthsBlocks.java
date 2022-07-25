@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BlazingDepthsBlocks {
-    //Store the shade of orange used for seared sand's dust and the seared dunes biome's fog, in decimal format (not hexadecimal)
+    //Store the shade of orange used for seared sand's dust particles and the seared dunes biome's fog, in decimal format (not hexadecimal)
     //(This shade was the brightest shade from the original, lost version of the seared sandstone top texture)
     public static final int SearedSandDustColor = 13784875;
 

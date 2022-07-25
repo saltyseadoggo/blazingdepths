@@ -15,33 +15,19 @@ import terrablender.worldgen.TBSurfaceRuleData;
 
 import java.util.function.Consumer;
 
+    //Due to Fabric API lacking surface rule adding functionality, we need an external dependency to add surface rules.
+    //Both Terra Blender and Quilt Standard Libraries can handle this. Many mods already need Terra Blender, so I chose the former for end user convenience.
+
 public class BlazingDepthsTerraBlenderImpl implements TerraBlenderApi {
     //As per Terra Blender's documentation, all of its functions have to be done in one class.
     //See: https://github.com/Glitchfiend/TerraBlender/wiki/Getting-started
 
     @Override
     public void onTerraBlenderInitialized() {
-        //Register our biome provider containing our biomes
-        Regions.register(new BlazingDepthsBiomeProvider());
         //Add our surface rules
         SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK,
                 1, BlazingDepthsSurfaceRules.makeRules());
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, "blazing_depths",
                 TBSurfaceRuleData.nether());
-    }
-
-    //Class in a class? I didn't know this was possible but this is how the Terra Blender docs say to do it.
-    public static class BlazingDepthsBiomeProvider extends Region {
-        //The Terra Blender documentation uses the Mojang mappings class name ResourceLocation. With Yarn, it is Identifier.
-        public BlazingDepthsBiomeProvider() {
-            super(BlazingDepths.makeIdentifier("biome_provider"), RegionType.NETHER, 5);
-        }
-
-        //ResourceKey in the Terra Blender docs example is a Mojang mappings name; its Yarn name is RegistryKey.
-        @Override
-        public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
-            this.addBiome(mapper, MultiNoiseUtil.createNoiseHypercube(0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f),
-                    BlazingDepthsBiomes.SEARED_DUNES_KEY);
-        }
     }
 }
